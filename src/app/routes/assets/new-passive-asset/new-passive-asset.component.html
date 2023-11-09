@@ -1,0 +1,15 @@
+<h4 mat-dialog-title class="mb-0 d-flex justify-content-between align-items-center">
+  <span i18n="@@newPassiveAsset.Title">Register Single Asset</span>
+  <button mat-icon-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h4>
+
+<div mat-dialog-content>
+  <div mat-dialog-actions class="d-flex justify-content-center" style="border-top: 0">
+    <button mat-raised-button class="btn btn-primary w-100" type="submit" data-qa-id="dialog-register-asset"
+      (click)="registerAsset()" i18n="@@newPassiveAsset.Btn.Register">
+      Register
+    </button>
+  </div>
+</div>

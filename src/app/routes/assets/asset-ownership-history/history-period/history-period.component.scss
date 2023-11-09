@@ -1,0 +1,12 @@
+.border-vertical {
+  height: 18px;
+  position: relative;
+  left: 11px;
+  top: -1px;
+
+  mat-icon {
+    position: absolute;
+    left: -12.5px;
+    top: 8px;
+  }
+}

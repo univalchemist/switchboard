@@ -1,0 +1,9 @@
+{
+  "/api/*": {
+    "target": "https://api2.kistelek.eu:8443/v1",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": { "^/api": "" }
+  }
+}

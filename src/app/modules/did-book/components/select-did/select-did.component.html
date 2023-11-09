@@ -1,0 +1,25 @@
+<mat-label class="ml-3 pl-1">{{ label }}</mat-label>
+<mat-form-field class="mt-2" appearance="outline">
+  <input matInput autocomplete="off" [formControl]="newDID" type="text" [placeholder]="placeholder"
+    data-qa-id="did-input" [matAutocomplete]="auto" maxlength="256" />
+  <button *ngIf="showAddButton" matTooltip="Add DID" matSuffix mat-icon-button aria-label="Add" type="submit"
+    data-qa-id="add-did" (click)="addDid($event)" [disabled]="newDID.invalid">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of didBook$ | async" [value]="option.did">
+      {{ option.label }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="newDID?.hasError('required')"> DID is <strong i18n="@@selectDid.Required">required</strong>
+  </mat-error>
+  <mat-error *ngIf="newDID?.hasError('invalidDid')" i18n="@@selectDid.InvalidFormat"> DID format is invalid</mat-error>
+  <mat-error *ngIf="newDID.hasError('exist')" i18n="@@selectDid.Exist"> This DID already exist on the list</mat-error>
+</mat-form-field>
+<div class="col-12" *ngIf="isNotKnownDid && newDID.valid && newDID.value">
+  <div>
+    <span i18n="@@selectDid.AskToAdd">Do you want to add this DID to your DID Book?</span>
+    <button mat-stroked-button class="btn-small ml-2" data-qa-id="add" (click)="approveHandler()"
+      i18n="@@selectDid.Yes">Yes</button>
+  </div>
+</div>

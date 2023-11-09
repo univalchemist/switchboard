@@ -1,0 +1,17 @@
+<div style="height: 100%; width: 100%">
+  <ngx-spinner bdColor="rgba(16, 14, 22, .9)" size="medium" [color]="loaderColor" type="ball-spin-fade"
+    class="text-center">
+    <p class="loading-text mt-4" *ngIf="!msg && !msgList" data-qa-id="loading" i18n="@@loading.Text">Loading...</p>
+    <p class="loading-text mt-4" *ngIf="msg" data-qa-id="loading">{{ msg }}</p>
+    <ng-container *ngIf="msgList">
+      <ng-container *ngFor="let message of msgList; let i = index">
+        <p class="loading-text position-relative" style="top: 10px" *ngIf="!i">
+          {{ message }}
+        </p>
+        <p class="loading-text position-relative" *ngIf="i">{{ message }}</p>
+      </ng-container>
+    </ng-container>
+    <button mat-stroked-button *ngIf="isCancellable" class="btn btn-small" (click)="cancel()"><span
+        i18n="@@loading.Cancel">Cancel</span></button>
+  </ngx-spinner>
+</div>

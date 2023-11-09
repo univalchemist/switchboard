@@ -1,0 +1,234 @@
+// Bootstrap
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import '../app/variables';
+@import '../app/material/colors';
+@import './preloader';
+$preloader-bg: #181423;
+:root {
+  --loader-color: var(--primary);
+  --warning-color: #ffa500;
+
+  // Preloader css properties
+  --preloader-bg: #{$preloader-bg};
+  --preloader-bg-darker: #{darken($preloader-bg, 5%)};
+
+  --button-primary: #42cb33;
+  --button-primary-color: #42cb33;
+  --btn-primary-hover: var(--primary);
+  --swal-button-cancel: #42cb33;
+  --btn-stroked-hover: #5bd6d6;
+  --stroked-filter-button: #42cb33;
+  --stroked-filter-button-hover: #5bd6d6;
+  --stroked-table-btn: #8677ae;
+  --stroked-table-btn-hover: #42cb33;
+
+  --button-toggle-group-border: #42cb33;
+  --button-toggle-color: #42cb33;
+  --button-toggle-checked-bg: #42cb33;
+
+  --btn-connect-bg: var(--primary-bg-color);
+  --btn-connect-color: #ffffff;
+
+  --primary-color: var(--primary);
+
+  --primary-bg-color: var(--primary);
+
+  --primary-hover-color: #cdfab2;
+
+  --nav-primary: var(--primary);
+  --nav-primary-hover: #42cb33;
+  --nav-primary-active: #42cb33;
+  --nav-border: #413f3f08;
+  --nav-bg: #ffffff;
+
+  --scrollbar: var(--primary);
+  --scrollbar-hover: #42cb33;
+
+  --content-bg: #ffffff;
+  --dropdown-item-active: 181423;
+  --menu-panel: #ffffff;
+  --navbar-text-color: #ffffff;
+  --default-text-color: var(--primary);
+  --primary-text-color: var(--primary);
+  --label-role-color: #ffffff;
+  --input-color: var(--primary);
+  --input-color-disabled: rgba(30, 150, 70, 0.4);
+  --search-input-color: var(--primary-color);
+  --default-link-color: #42cb33;
+
+  --json-editor-menu-bg: #2a2837;
+  --json-editor-text-color: #ffffff;
+  --json-editor-object-text-color: #ffffff;
+
+  --list-group-item: #ffffff;
+
+  --list-group-item-hover: var(--primary-hover-color);
+
+  --overlay-content-bg: #ffffff;
+  --overlay-backdrop-bg: rgba(38, 33, 51, 0.88);
+  --swal-overlay-bg: rgba(16, 14, 22, 0.9);
+  --swal-button-hover: #289b9b;
+  --swal-button-cancel-hover: #289b9b;
+  --swal-button-confirm-hover: #289b9b;
+  --swal-button-enrol-hover: #289b9b;
+  --swal-success-bg: #a467ff;
+  --swal-text-color: rgba(255, 255, 255, 0.8);
+
+  --card-bg: #ffffff;
+  --card-disabled-bg: #181523ff;
+  --card-disabled-border: #181523ff;
+  --card-icon-bg: rgba(132, 131, 144, 0.06);
+  --card-icon-border: var(--primary-color);
+  --card-icon-hover-bg: var(--primary-hover-color);
+  --card-icon-hover-border: var(--primary-hover-color);
+  --card-register-after-border: #2a2837;
+  --card-register-after-bg: transparent;
+
+  --card-success-border: rgb(135 193 141 / 45%);
+  --card-success-bg: rgba(117, 254, 197, 0.05);
+  --card-success-color: rgb(174 255 176 / 71%);
+  --card-search-body-bg: #363443;
+
+  --card-hint-border: #efe1b533;
+  --card-hint-bg: #efe1b533;
+  --card-hint-color: #fff2c1;
+
+  --card-info-border: #c1ffc5;
+  --card-info-bg: rgb(193 255 249 / 8%);
+  --info-color: #c1ffc5;
+
+  --card-warning-border: rgb(255 165 0 / 50%);
+  --card-warning-bg: #ffa50014;
+
+  --register-bg: #181421;
+
+  --card-result-border: var(--primary);
+  --card-result-bg: transparent;
+
+  --card-result-list-bg: var(--primary);
+  --mat-drawer-bg: var(--primary);
+  --mat-expansion-panel-bg: #ffffff;
+
+  --img-container-bg: var(--primary);
+  --card-filter-bg: var(--primary);
+  --card-filter-color: #ffffff;
+
+  --table-header-cell-bg: #ffffff;
+  --row-odd-bg: #ffffff;
+  --row-even-bg: #ffffff;
+  --row-border: #dadada;
+
+  --tab-labels-bg: #9cf395c1;
+  --tab-label-color: var(--primary);
+  --ink-bar-bg: var(--primary);
+
+  --dialog-title-color: var(--primary);
+  --dialog-border: var(--primary);
+  --dialog-actions-border: #363546;
+  --dialog-icon-button-color: var(--primary);
+
+  --img-wrapper-border: #353540;
+
+  --img-thumbnail-bg: #ffffff;
+  --img-thumbnail-border: var(--primary);
+  --divider-border: #d8d8d8;
+  --notif-container-bg: #2a2a37;
+
+  --did-wrapper-bg: var(--primary-hover-color);
+  --did-wrapper-color: #a6a5ab;
+  --did-wrapper-hover-color: #42cb33;
+
+  --step-icon-color: var(--primary);
+  --step-icon-default-color: var(--primary);
+  --step-label: var(--primary);
+  --stepper-vertical-line: var(--primary);
+
+  --field-appearance-outline-bg: #1c1726;
+  --field-appearance-outline-color: var(--primary-color);
+  --field-appearance-outline-thick-color: var(--primary-color);
+
+  --dropdown-option-odd-bg: #ffffff;
+  --dropdown-option-bg: #ffffff;
+
+  --form-placeholder: #7ed04a;
+  --toggle-color: white;
+  --icon-disabled: rgb(207 207 207 / 25%);
+
+  --error-color: #c82e2e;
+  --success-color: #0fb544;
+  --btn-warn-color: #ffa500;
+
+  --btn-connect-hover: #131214;
+  --btn-disabled-color: rgba(255, 255, 255, 0.3);
+  --btn-disabled-bg: var(--primary);
+  --suffix-icon-btn-bg: #42cb33;
+  --icon-color: var(--primary);
+
+  --tooltip-color: var(--primary);
+  --sub-org-tooltip-border: #67ff92;
+  --sub-org-tooltip-color: #67ff92;
+  --select-placeholder-color: #7ed04a;
+  --option-selected: var(--primary);
+
+  --select-option-selected-not-multiple-bg: var(--primary);
+  --select-option-selected-not-multiple-color: rgba(255, 255, 255, 0.8);
+  --select-option-hover: var(--primary-hover-color);
+  --option-active-color: #ffffff;
+  --option-active-bg: var(--primary);
+  --autocomplete-panel-bg: #2a2837;
+  --expansion-panel-color: var(--primary);
+
+  --color-link: var(--primary);
+  --border-bottom: var(--primary);
+  --checkbox-checked-bg: var(--primary);
+  --field-list-item-bg: transparent;
+  --sub-row-bg: #302e40;
+
+  --datepicker-content: #ffffff;
+  --datepicker-color: var(--primary);
+  --datepicker-label-color: var(--primary);
+  --calendar-table-color: var(--primary);
+  --calendar-option-selected-bg: rgba(30, 150, 70, 0.5);
+  --calendar-divider-after-bg: rgba(30, 150, 70, 0.5);
+  --timepicker-body-selected: var(--primary);
+
+  --text-blur-shadow: rgb(255 255 255 / 50%);
+  --history-item-bg: #ffffff;
+  --border-vertical-color: #c1fff9;
+  --header-enroll-bg: var(--primary);
+  --footer-bg: #382856;
+  --footer-color: rgba(255, 255, 255, 0.5);
+
+  --select-arrow-color: var(--primary);
+
+  --field-outline-bg: #ffffff;
+  --field-outline-color: var(--primary);
+
+  --slide-toggle-thumb: var(--primary);
+  --slide-toggle-thumb-checked: var(--primary);
+  --slide-toggle-bar-bg: rgb(156, 255, 103);
+  --slide-toggle-content-color: var(--primary);
+}
+
+// Preloader
+.preloader-progress {
+  // background: url('/assets/img/preloader/preloader.empty.png') no-repeat;
+  background: url('/assets/img/logo-ew-kistel.svg') no-repeat;
+  width: 200px;
+  height: 65.5px;
+  background-size: 200px 65.5px;
+}
+
+.preloader-progress-bar {
+  background: url('/assets/img/logo-ew-kistel.svg') no-repeat;
+  width: 200px;
+  height: 65.5px;
+  background-size: 200px 65.5px;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: var(--primary-color);
+}

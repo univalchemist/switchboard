@@ -1,0 +1,46 @@
+<mat-tab-group mat-align-tabs="start" #enrolmentTabGroup (selectedTabChange)="showMe($event)">
+  <mat-tab i18n-label="@@enrolment.tab.credentials" label="Credentials">
+    <div class="row mx-0 mt-1">
+      <div class="col-xl-12">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <h4 class="default-color strong my-4" i18n="@@enrolment.heading.issueRole">Issue Role</h4>
+          <button *ngIf="(isExperimental$ | async) && issuesRoles" mat-raised-button
+            class="btn btn-primary btn-small mb-3 mb-lg-0" (click)="createVC()" i18n="@@enrolment.createVC">
+            Create VC
+          </button>
+        </div>
+        <div class="card card-default mb-3 pb-0">
+          <app-requested-enrolment-list [list]="requestedEnrolmentsList$ | async" [enrolmentStatus]="enrolmentStatus"
+            (refreshList)="refreshIssuerList()">
+          </app-requested-enrolment-list>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <!-- <mat-tab label="My Enrolments">
+    <div class="row mx-0 mt-1">
+      <div class="col-xl-12">
+        <div class="d-flex flex-column flex-md-row justify-content-md-start align-items-center">
+          <h4 class="default-color strong my-4">My Enrolments</h4>
+        </div>
+        <div class="card card-default mb-3 pb-0">
+          <app-my-enrolment-list [list]="myEnrolmentList$ | async" (refreshList)="refreshMyEnrolmentsList()">
+          </app-my-enrolment-list>
+        </div>
+      </div>
+    </div>
+  </mat-tab> -->
+  <mat-tab i18n-label="@@enrolment.tab.revokeVCs" label="Revoke VCs">
+    <div class="row mx-0 mt-1">
+      <div class="col-xl-12">
+        <div class="d-flex flex-column flex-md-row justify-content-md-start align-items-center">
+          <h4 class="default-color strong my-4" i18n="@@enrolment.revoke">Revoke</h4>
+        </div>
+        <div class="card card-default mb-3 pb-0">
+          <app-revoke-enrolment-list [list]="revocableList$ | async" (refreshList)="refreshRevocableList()">
+          </app-revoke-enrolment-list>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

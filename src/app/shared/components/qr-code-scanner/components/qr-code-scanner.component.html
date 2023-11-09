@@ -1,0 +1,7 @@
+<zxing-scanner #scanner (scanSuccess)="scanned($event)">
+</zxing-scanner>
+<!-- Button -->
+<button button mat-raised-button class="btn btn-primary md-enroll btn-cancel-scan" (click)="cancelScan()"
+  i18n="@@register.requestClaim.fieldBtn.CancelScanQRcode">
+  Cancel
+</button>

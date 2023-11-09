@@ -1,0 +1,42 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": false,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types"],
+    "inlineSources": true,
+    "sourceRoot": "/",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@state": ["src/app/state/index"],
+      "@operators": ["src/app/operators/index"],
+      "@modules": ["src/app/modules/index"],
+      "@tests": ["src/app/tests/index"],
+      "@utils": ["src/app/utils/index"]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

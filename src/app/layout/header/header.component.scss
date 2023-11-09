@@ -1,0 +1,117 @@
+.mat-dialog-content {
+  padding: 0 !important;
+}
+
+a:hover {
+  background-color: initial;
+}
+
+.header-notification-container {
+  padding: 5px;
+}
+
+::ng-deep .mat-menu-content:not(:empty) {
+  padding: 0 !important;
+}
+
+.mt-2,
+.my-2 {
+  margin-top: 0.6rem !important;
+}
+
+.topnavbar .navbar-nav > .nav-item > .nav-link.coming-soon {
+  color: #8b8a91;
+  cursor: auto;
+}
+
+.icon-footer-center {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 15px;
+}
+
+.notification {
+  &-item {
+    padding: 10px 0;
+  }
+
+  &-icon {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    border-radius: 100%;
+  }
+}
+
+.header-notification {
+  background-color: #2a2937;
+}
+
+.link-footer img {
+  filter: saturate(1);
+
+  &:hover {
+    filter: hue-rotate(285deg);
+  }
+}
+
+.link-footer.coming-soon img {
+  filter: saturate(0);
+  opacity: 0.2;
+
+  &:hover {
+    filter: saturate(0);
+  }
+}
+
+.did-wrapper {
+  margin-top: 7px;
+  background-color: var(--did-wrapper-bg);
+  color: var(--primary-color);
+  padding: 8px 12px;
+  border-radius: 50px;
+  cursor: pointer;
+
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+    padding-top: 2px;
+  }
+
+  &:hover {
+    mat-icon {
+      color: #42cb33;
+    }
+  }
+}
+
+.experimental-warning {
+  position: absolute;
+  top: 18px;
+  right: 0;
+  color: var(--warning-color);
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  cursor: pointer;
+
+  @media (max-width: 991px) {
+    top: 4px;
+    right: 20px;
+  }
+}
+
+.experimental {
+  position: absolute;
+  right: 85px;
+  top: 5px;
+  color: var(--warning-color);
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  cursor: pointer;
+}

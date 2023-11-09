@@ -1,0 +1,10 @@
+:host zxing-scanner::ng-deep video {
+  height: 90vh;
+  object-fit: contain;
+}
+
+.btn-cancel-scan {
+  width: 95vw;
+  margin-left: 10px;
+  margin-right: 10px;
+}

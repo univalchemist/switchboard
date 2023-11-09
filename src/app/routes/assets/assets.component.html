@@ -1,0 +1,38 @@
+<router-outlet></router-outlet>
+<mat-tab-group mat-align-tabs="center" #assetsTabGroup (selectedTabChange)="showMe($event)">
+  <!-- MY ASSETS -->
+  <mat-tab i18n-label="@@assets.tab.title.assets" label="My Assets" data-qa-id="my-assets-tab">
+    <div class="row mx-0 mt-1">
+      <div class="col-xl-12">
+        <app-table-heading i18n-heading="@@assets.tab.title.assets.heading" heading="My Assets">
+          <button mat-raised-button class="btn btn-primary btn-small mb-3 mb-lg-0" data-qa-id="register-asset"
+            (click)="registerAsset()" i18n="@@assets.Register">
+            Register Asset
+          </button>
+        </app-table-heading>
+        <app-asset-list #listMyAssets [listType]="AssetListType.MY_ASSETS" [showDidFilter]="true"></app-asset-list>
+      </div>
+    </div>
+  </mat-tab>
+
+  <!-- ASSETS OFFERED TO ME -->
+  <mat-tab i18n-label="@@assets.tab.title.assetsInbox" label="Assets Inbox" data-qa-id="assets-offered-to-tab">
+    <div class="row mx-0 mt-1">
+      <div class="col-xl-12">
+        <app-table-heading i18n-heading="@@assets.tab.title.assetsInbox" heading="Assets Inbox"></app-table-heading>
+        <app-asset-list #listOfferedAssets [listType]="AssetListType.OFFERED_ASSETS"
+          (selectTab)="setSelectedTab($event)"></app-asset-list>
+      </div>
+    </div>
+  </mat-tab>
+
+  <!-- PREVIOUSLY OWNED ASSETS -->
+  <mat-tab i18n-label="@@assets.tab.title.assetsSent" label="Sent Assets" data-qa-id="assets-prev-owned-tab">
+    <div class="row mx-0 mt-1">
+      <div class="col-xl-12">
+        <app-table-heading i18n-heading="@@assets.tab.title.assetsSent" heading="Sent Assets"></app-table-heading>
+        <app-asset-list #listPreviousAssets [listType]="AssetListType.PREV_OWNED_ASSETS"></app-asset-list>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

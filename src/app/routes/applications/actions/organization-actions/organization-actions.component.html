@@ -1,0 +1,41 @@
+<button mat-menu-item class="btn-color-primary" data-qa-id="create-sub-org" (click)="createSubOrganization()">
+  <mat-icon class="btn-color-primary btn-action-3" svgIcon="add-organization-icon"></mat-icon>
+  <span i18n="@@orgActions.CreateSubOrg">Create Sub-Organization</span>
+</button>
+
+<button mat-menu-item [disabled]="!organization?.containsApps" class="btn-color-primary" data-qa-id="view-apps"
+  (click)="viewAppsHandler()">
+  <mat-icon class="btn-color-primary btn-action-3" svgIcon="view-application-icon"></mat-icon>
+  <span i18n="@@orgActions.ViewApplications">View Applications</span>
+</button>
+
+<button mat-menu-item [disabled]="!organization?.containsRoles" class="btn-color-primary" data-qa-id="view-roles"
+  (click)="viewRolesHandler()">
+  <mat-icon class="btn-color-primary btn-action-3" svgIcon="view-role-icon"></mat-icon>
+  <span i18n="@@orgActions.ViewRoles">View Roles</span>
+</button>
+
+<button mat-menu-item class="btn-color-primary" data-qa-id="create-app" (click)="createApp()">
+  <mat-icon class="btn-color-primary btn-action-3" svgIcon="add-application-icon"></mat-icon>
+  <span i18n="@@orgActions.CreateApplication">Create Application</span>
+</button>
+
+<button mat-menu-item class="btn-color-primary" data-qa-id="create-role" (click)="createRole()">
+  <mat-icon class="btn-color-primary btn-action-3" svgIcon="add-role-icon"></mat-icon>
+  <span i18n="@@orgActions.CreateRole">Create Role</span>
+</button>
+
+<button mat-menu-item class="btn-color-primary" data-qa-id="edit" (click)="edit()">
+  <mat-icon class="btn-color-primary">edit</mat-icon>
+  <span i18n="@@orgActions.Edit">Edit</span>
+</button>
+
+<button mat-menu-item class="btn-color-primary" data-qa-id="transfer-ownership" (click)="transferOwnership()">
+  <mat-icon class="btn-color-primary btn-action-1" svgIcon="transfer-ownership-icon"></mat-icon>
+  <span i18n="@@orgActions.TransferOwnership">Transfer Ownership</span>
+</button>
+
+<button mat-menu-item class="btn-color-error" data-qa-id="delete" (click)="delete()">
+  <mat-icon class="btn-color-error">delete_outline</mat-icon>
+  <span i18n="@@orgActions.Delete">Delete</span>
+</button>

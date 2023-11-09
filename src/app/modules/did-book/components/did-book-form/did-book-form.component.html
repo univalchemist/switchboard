@@ -1,0 +1,39 @@
+<form [formGroup]="form">
+  <div class="px-0">
+    <mat-label i18n="@@didBook.FormLabel">Label</mat-label>
+    <mat-form-field class="mt-2" appearance="outline">
+      <input matInput type="text" placeholder="Label" autocomplete="off" data-qa-id="label" formControlName="label" />
+      <mat-error>
+        <span i18n="@@didBook.FormFieldIs">This field is </span>
+        <strong i18n="@@didBook.FormFieldRequired">required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="px-0">
+    <mat-label>DID</mat-label>
+    <mat-form-field class="mt-2" appearance="outline">
+      <input matInput type="text" placeholder="DID" autocomplete="off" data-qa-id="did" formControlName="did" />
+      <mat-error *ngIf="getDIDError('required')">
+        <span i18n="@@didBook.FormFieldIs">This field is </span>
+        <strong i18n="@@didBook.FormFieldRequired">required</strong>
+      </mat-error>
+      <mat-error *ngIf="getDIDError('invalidDid')" i18n="@@didBook.FormInvalidFormat">Invalid DID format.</mat-error>
+      <mat-error *ngIf="getDIDError('exist')" i18n="@@didBook.FormAlreadyExist">This DID already exist in DID
+        Book</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="d-flex justify-content-between mb-2">
+    <button *ngIf="shouldCloseForm" mat-raised-button class="btn btn-small btn btn-primary" data-qa-id="cancel"
+      (click)="closeForm()">
+      <span i18n="@@didBook.FormBtnCancel">Cancel</span>
+    </button>
+    <button *ngIf="shouldClearForm" mat-raised-button class="btn btn-small btn btn-primary" data-qa-id="clear"
+      [disabled]="clearDisabled" (click)="clearForm($event)">
+      <span i18n="@@didBook.FormBtnClear">Clear</span>
+    </button>
+    <button mat-raised-button class="btn btn-small btn btn-primary" type="submit" (click)="submit()"
+      [disabled]="isFormInvalid" data-qa-id="add">
+      <span i18n="@@didBook.FormBtnAdd">Add</span>
+    </button>
+  </div>
+</form>

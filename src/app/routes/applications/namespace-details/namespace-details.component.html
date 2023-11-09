@@ -1,0 +1,37 @@
+<div class="card card-default d-flex shadow-none d-flex pt-3 mb-3">
+  <app-domain-image [url]="data?.logoUrl" [type]="type" (imageLoaded)="imageEventHandler($event)"></app-domain-image>
+  <div class="text-left my-3">
+    <div class="label opacity-50 mb-2" i18n="@@namespaceDetails.Namespace">{{ type }} Namespace</div>
+    <span class="default-color mb-0">
+      {{ namespace }}
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="text-left my-3">
+    <div class="label opacity-50 mb-2" i18n="@@namespaceDetails.Name">{{ type }} Name</div>
+    <span class="default-color mb-0">
+      {{ name }}
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="text-left my-3">
+    <div class="label opacity-50 mb-2" i18n="@@namespaceDetails.WebsiteURL">Website URL</div>
+    <span class="default-color mb-0">
+      {{ data?.websiteUrl | defaultValue }}
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="text-left my-3">
+    <div class="label opacity-50 mb-2" i18n="@@namespaceDetails.Description">Description</div>
+    <span class="default-color mb-0">
+      {{ data?.description | defaultValue }}
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="text-left my-3">
+    <div class="label opacity-50 mb-2" i18n="@@namespaceDetails.OthersJson">Others (JSON)</div>
+    <span class="default-color mb-0">
+      {{ data?.others | defaultValue }}
+    </span>
+  </div>
+</div>

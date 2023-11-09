@@ -1,0 +1,81 @@
+<h4 mat-dialog-title class="mb-0 d-flex justify-content-between align-items-center">
+  <span i18n="@@newAssetType.Title">Add New Asset Type</span>
+  <button mat-icon-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h4>
+
+<div mat-dialog-content>
+  <div class="mb-2 mt-4 mx-4 mx-lg-4">
+    <form>
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-label class="ml-3 pl-1" i18n="@@newAssetType.Name">Name</mat-label>
+          <mat-form-field class="mt-2" appearance="outline" floatPlaceholder="never">
+            <input matInput autocomplete="off" formControlName="roleName" type="text"
+              i18n-placeholder="@@newAssetType.Name.Placeholder" placeholder="Role Name" required />
+            <mat-error>
+              <span i18n="@@newAssetType.NameIs">Name is</span>
+              <strong i18n="@@newAssetType.Name.Required">required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+          <div class="d-flex justify-content-between">
+            <mat-label class="ml-3 pl-1" i18n="@@newAssetType.TypeNamespace">Type Namespace</mat-label>
+            <div class="tooltip-wrapper">
+              <mat-icon class="tooltip-color cursor-pointer" matTooltipClass="multiline-tooltip"
+                matTooltipPosition="above" matTooltip="Type namespace associated with metadata">
+                info
+              </mat-icon>
+            </div>
+          </div>
+          <mat-form-field class="mt-2" appearance="outline" floatPlaceholder="never">
+            <input matInput autocomplete="off" formControlName="roleName" type="text" placeholder="Namespace"
+              required />
+            <mat-error>
+              <span i18n="@@newAssetType.NamespaceIs">Namespace is</span>
+              <strong i18n="@@newAssetType.Namespace.Required">required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+          <div class="d-flex justify-content-between">
+            <mat-label class="ml-3 pl-1" i18n="@@newAssetType.Issuer">Issuer</mat-label>
+            <div class="tooltip-wrapper">
+              <mat-icon class="tooltip-color cursor-pointer" matTooltipClass="multiline-tooltip"
+                matTooltipPosition="above" matTooltip="Verifier of the asset type">
+                info
+              </mat-icon>
+            </div>
+          </div>
+          <mat-form-field class="mt-2" appearance="outline" floatPlaceholder="never">
+            <input matInput autocomplete="off" formControlName="roleName" type="text" placeholder="Issuer" required />
+            <mat-error>
+              <span i18n="@@newAssetType.IssuerIs">Issuer is</span>
+              <strong i18n="@@newAssetType.Issuer.Required">required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+          <div class="d-flex justify-content-between">
+            <mat-label class="ml-3 pl-1" i18n="@@newAssetType.Fields">Fields</mat-label>
+            <div class="tooltip-wrapper">
+              <mat-icon class="tooltip-color cursor-pointer" matTooltipClass="multiline-tooltip"
+                matTooltipPosition="above" matTooltip="Owners needs to key in Serial number or QR Code">
+                info
+              </mat-icon>
+            </div>
+          </div>
+          <mat-form-field class="mt-2" appearance="outline" floatPlaceholder="never">
+            <input matInput autocomplete="off" formControlName="roleName" type="text"
+              placeholder="Serial Number or Purchase ID" required />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-center">
+  <button mat-raised-button class="btn btn-primary w-100" type="submit" i18n="@@newAssetType.Btn.Create">Create</button>
+</div>

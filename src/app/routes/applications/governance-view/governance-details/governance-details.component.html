@@ -1,0 +1,178 @@
+<div class="row">
+  <div class="card card-default w-100 shadow-none d-flex pt-3">
+    <app-domain-image *ngIf="!isRole" [url]="formData?.definition?.logoUrl" [type]="type"></app-domain-image>
+    <div class="text-left my-3">
+      <div class="label opacity-50 mb-2" data-qa-id="type-namespace" i18n="@@govDetails.Namespace">{{ typeLabel }}
+        Namespace</div>
+      <span class="default-color mb-0" data-qa-id="namespace">{{ formData?.namespace }}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="text-left my-3">
+      <div class="label opacity-50 mb-2" i18n="@@govDetails.Name">{{ typeLabel }} Name</div>
+      <span class="default-color mb-0" data-qa-id="name">
+        <ng-container *ngIf="isOrganization">
+          {{ formData?.definition?.orgName }}
+        </ng-container>
+        <ng-container *ngIf="isApplication">
+          {{ formData?.definition?.appName }}
+        </ng-container>
+        <ng-container *ngIf="isRole">
+          {{ formData?.name | uppercase }}
+        </ng-container>
+      </span>
+    </div>
+    <ng-container *ngIf="!isRole">
+      <mat-divider></mat-divider>
+      <div class="text-left my-3">
+        <div class="label opacity-50 mb-2" i18n="@@govDetails.WebsiteURL">Website URL</div>
+        <span class="default-color mb-0" data-qa-id="website-url">
+          {{ formData?.definition?.websiteUrl | defaultValue }}
+        </span>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="text-left my-3">
+        <div class="label opacity-50 mb-2" i18n="@@govDetails.Description">Description</div>
+        <span class="default-color mb-0" data-qa-id="description">
+          {{ formData?.definition?.description | defaultValue }}
+        </span>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="text-left my-3">
+        <div class="label opacity-50 mb-2" i18n="@@govDetails.OthersJson">Others (JSON)</div>
+        <span class="default-color mb-0" data-qa-id="others">
+          {{ formData?.definition?.others | defaultValue }}
+        </span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isRole">
+      <mat-divider></mat-divider>
+      <div class="text-left my-3">
+        <div class="label opacity-50 mb-2" i18n="@@govDetails.RoleType">Role Type</div>
+        <span class="default-color mb-0" data-qa-id="role-type">
+          {{ formData?.definition?.roleType | domainType }}
+        </span>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="text-left my-3">
+        <div class="label opacity-50 mb-2" i18n="@@govDetails.Version">Version</div>
+        <span class="default-color mb-0" data-qa-id="version">
+          {{ formData?.definition?.version }}
+        </span>
+      </div>
+      <ng-container *ngIf="issuer">
+        <mat-divider></mat-divider>
+        <div class="text-left my-3">
+          <div class="label opacity-50 mb-2" i18n="@@govDetails.IssuerType">Issuer Type</div>
+          <span class="default-color mb-0" data-qa-id="issuer-type">{{ issuer?.issuerType }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <ng-container *ngIf="isRoleType(issuer.issuerType)">
+          <div class="text-left my-3">
+            <div class="label opacity-50 mb-2" i18n="@@govDetails.Role">Role</div>
+            <span class="default-color mb-0" data-qa-id="issuer-role">{{ issuer?.roleName }}</span>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isDIDType(issuer.issuerType)">
+          <div class="text-left my-3">
+            <div class="label opacity-50 mb-2" i18n="@@govDetails.IssuerList">Issuer List</div>
+            <div class="default-color mb-0" *ngFor="let did of issuer?.did; let id = index"
+              [attr.data-qa-id]="'issuer-did-' + id">
+              {{ did }}
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="revoker">
+        <mat-divider></mat-divider>
+        <div class="text-left my-3">
+          <div class="label opacity-50 mb-2" i18n="@@govDetails.RevokerType">Revoker Type</div>
+          <span class="default-color mb-0" data-qa-id="revoker-type">{{ revoker?.revokerType }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <ng-container *ngIf="isRoleType(revoker.revokerType)">
+          <div class="text-left my-3">
+            <div class="label opacity-50 mb-2" i18n="@@govDetails.Role">Role</div>
+            <span class="default-color mb-0" data-qa-id="revoker-role">{{ revoker?.roleName }}</span>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isDIDType(revoker.revokerType)">
+          <div class="text-left my-3">
+            <div class="label opacity-50 mb-2" i18n="@@govDetails.RevokerList">Revoker List</div>
+            <div class="default-color mb-0" *ngFor="let did of revoker?.did; let id = index"
+              [attr.data-qa-id]="'revoker-did-' + id">
+              {{ did }}
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <mat-divider></mat-divider>
+      <div class="text-left my-3">
+        <div class="label opacity-50 mb-2" i18n="@@govDetails.RestrictionsRolePreconditions">Restrictions (Role
+          Preconditions)</div>
+        <div class="default-color mb-0" data-qa-id="empty-preconditions"
+          *ngIf="!preconditions[PreconditionTypes.Role]?.length" i18n="@@govDetails.None">
+          None
+        </div>
+        <div class="default-color mb-0"
+          *ngFor="let precondition of preconditions[PreconditionTypes.Role]; let id = index"
+          [attr.data-qa-id]="'precondition-' + id">
+          {{ precondition }}
+        </div>
+      </div>
+      <div class="text-left my-3">
+        <div class="label opacity-50 mb-2" i18n="@@govDetails.ValidityPeriod">Validity Period</div>
+        <div class="default-color mb-0" data-qa-id="validity-period">
+          {{ validityPeriod | timeDuration }}
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <app-fields-details [data]="requestorFields" title="Requestor Fields"></app-fields-details>
+      <mat-divider></mat-divider>
+      <app-fields-details [data]="issuerFields" title="Issuer Fields"></app-fields-details>
+    </ng-container>
+    <ng-container *ngIf="isEmbedded && isOrganization">
+      <mat-divider></mat-divider>
+      <mat-accordion>
+        <mat-expansion-panel class="mt-2" [expanded]="true" (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title i18n="@@govDetails.AppList">Application List</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="default-color mb-0" *ngIf="!appList?.length">None</div>
+          <div class="d-flex justify-content-between align-items-center border-bottom-list" *ngFor="let app of appList">
+            <div>{{ app?.definition?.appName }}</div>
+            <button mat-icon-button matTooltip="View Details" (click)="viewDetails(app, ListType.APP)">
+              <mat-icon class="btn-color-primary">preview</mat-icon>
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-container>
+    <ng-container *ngIf="isEmbedded">
+      <mat-divider></mat-divider>
+      <mat-accordion>
+        <mat-expansion-panel class="mt-2" [expanded]="true" (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title i18n="@@govDetails.RolesList">Roles List</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="default-color mb-0" *ngIf="!roleList?.length">None</div>
+          <div class="d-flex justify-content-between align-items-center border-bottom-list"
+            *ngFor="let role of roleList">
+            {{ role.name }}
+            <div>
+              <button mat-icon-button matTooltip="View Details" (click)="viewDetails(role, ListType.ROLE)">
+                <mat-icon class="btn-color-primary">preview</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Enrol" [routerLink]="['/enrol']"
+                [queryParams]="getQueryParams(data?.type, role)">
+                <mat-icon class="btn-color-primary btn-action-3" svgIcon="add-role-icon"></mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-container>
+  </div>
+</div>

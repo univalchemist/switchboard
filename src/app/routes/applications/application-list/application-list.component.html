@@ -1,0 +1,61 @@
+<div class="card card-default mb-3 pb-3">
+  <app-cascading-filter [showRoleFilter]="false" [filters]="predefinedFilters"
+    [showResetFilter]="true"></app-cascading-filter>
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">
+    <!-- Logo Column -->
+    <ng-container matColumnDef="logoUrl">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" data-label="">
+        <div class="d-flex justify-content-center justify-content-md-start">
+          <ng-container *ngIf="!element?.definition?.logoUrl">
+            <img class="img-logo-list" src="../assets/img/no-app-image.png" />
+          </ng-container>
+          <img class="img-logo-list" [src]="element?.definition?.logoUrl" *ngIf="element?.definition?.logoUrl" />
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Name -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@appList.AppName">Application Name</th>
+      <td mat-cell *matCellDef="let element" data-label="Name" class="cursor-pointer">
+        <div class="d-flex flex-row justify-content-between justify-content-lg-start">
+          {{ element?.definition?.appName }}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Namespace Column -->
+    <ng-container matColumnDef="namespace">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <ng-container i18n="@@appList.Namespace">Application Namespace</ng-container>
+      </th>
+      <td mat-cell *matCellDef="let element" data-label="Namespace">
+        {{ element.namespace }}
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="text-right"></th>
+      <td mat-cell *matCellDef="let element; let i = index">
+        <app-actions-menu [id]="i">
+          <button mat-menu-item class="btn-color-primary" (click)="viewDetails(element)">
+            <mat-icon class="btn-color-primary">preview</mat-icon>
+            <span i18n="@@appList.ViewDetails">View Details</span>
+          </button>
+
+          <app-application-actions [application]="element" (viewRoles)="viewRoles(element)"
+            (roleCreated)="viewRoles(element)" (edited)="edit()" (transferred)="transferOwnership()"
+            (deleteConfirmed)="remove(element)"></app-application-actions>
+        </app-actions-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <app-no-records *ngIf="!dataSource?.data?.length"></app-no-records>
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" [hidePageSize]="true" showFirstLastButtons>
+  </mat-paginator> -->
+</div>

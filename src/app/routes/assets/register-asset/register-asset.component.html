@@ -1,0 +1,87 @@
+<div class="w-100 h-responsive bg-color">
+  <div class="d-flex justify-content-center flex-column align-items-center w-100">
+    <div
+      class="position-relative d-flex txt-color justify-content-start justify-content-md-center align-items-md-center flex-column px-4 mb-1 w-100"
+      >
+      <div class="back-btn">
+        <mat-icon class="mr-2 back-icon" svgIcon="arrow-back-icon"></mat-icon>
+        <span i18n="@@register.asset.back">Back</span>
+      </div>
+    </div>
+    <form role="form" [formGroup]="assetForm">
+      <button mat-raised-button class="btn btn-primary md-enroll w-100" (click)="test()">
+        <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
+      </button>
+      <!-- Wireless pod -->
+      <mat-card class="asset-form mt-5">
+        <div class="row">
+          <div class="col-lg-12">
+            <mat-label class="card-block-label" i18n="@@register.asset.wirelessPod">Wireless pod</mat-label>
+          </div>
+          <div class="col-lg-12">
+            <mat-label class="" i18n="@@register.asset.wirelessType">Type</mat-label>
+            <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+              <mat-select class="md-enroll" placeholder="Please select type" formControlName="wirelessType"
+                (selectionChange)="enrolForSelected($event)">
+                <mat-option class="md-enroll" [value]="WirelessPodType.ModbusRTU">ModbusRTU</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-12">
+            <mat-label class="" i18n="@@register.asset.wirelessPod.serialNumber">Serial number</mat-label>
+            <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.wirelessPod.serialNumber.placeholder"
+                placeholder="Enter serial number" formControlName="wirelessSn" maxlength="256" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-12">
+            <mat-label class="" i18n="@@register.asset.publicKey">Public key</mat-label>
+            <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.wireless.publicKey.placeholder"
+                placeholder="Enter public key" formControlName="wirelessPublicKey" maxlength="256" />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card>
+      <!-- Solar powerplant -->
+      <mat-card class="asset-form">
+        <div class="row">
+          <div class="col-lg-12">
+            <mat-label class="card-block-label" i18n="@@register.asset.solarPowerPlant">Solar powerplant</mat-label>
+          </div>
+          <div class="col-lg-12">
+            <mat-label class="" i18n="@@register.asset.solar.peakPower">Peak power</mat-label>
+            <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                placeholder="Enter peak power" formControlName="solarPeakPower" maxlength="256" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <mat-label class="card-block-label" i18n="@@register.asset.inverter">Inverter</mat-label>
+          </div>
+          <div class="col-lg-12">
+            <mat-label class="" i18n="@@register.asset.inverterType">Type</mat-label>
+            <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.inverterType.placeholder"
+                placeholder="Enter Inverter type" formControlName="solarInverterType" maxlength="256" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-12">
+          </div>
+        </div>
+      </mat-card>
+    </form>
+    <!-- <div class="footer"><div class="d-flex justify-content-between align-items-center mx-3 mx-md-4 h-100">
+      <div>
+        <img src="assets/img/icons/ew-logo-white.png" width="98px" height="auto" />
+      </div>
+      <div>
+        <a class="default-color mx-2" href="#">Privacy Policy</a>
+        <a class="default-color mx-2" href="#">Cookies Policy</a>
+      </div>
+    </div>
+    </div> -->
+  </div>
+</div>

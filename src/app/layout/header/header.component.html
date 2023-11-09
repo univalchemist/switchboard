@@ -1,0 +1,116 @@
+<ng-container *ngIf="userName$ | async as userName">
+  <!-- START Top Navbar-->
+  <nav class="navbar topnavbar" role="navigation">
+    <!-- START navbar header-->
+    <div class="navbar-header" id="navbarHeader">
+      <a routerLink="/dashboard" data-qa-id="logo">
+        <!-- <img src="assets/img/logo-ew-kistel.svg" class="logo-ew"/> -->
+        <div class="header-logo"></div>
+      </a>
+    </div>
+    <ul class="menu-top navbar-nav mx-auto flex-row align-items-center" *ngIf="isNavMenuVisible">
+      <li class="nav-item position-relative" [ngClass]="{ active: currentNav.includes('assets') }"
+        data-qa-id="header-assets">
+        <a class="nav-link d-lg-block d-xl-block cursor-pointer link-footer" routerLink="/assets">
+          <div class="icon-footer-center">
+            <img src="../assets/img/icons/assets-icon-new.png" width="auto" height="21" alt="assets image" />
+          </div>
+          <h6 class="mb-0" i18n="@@headerTab.Assets">Assets</h6>
+        </a>
+      </li>
+      <li *ngIf="isExperimentalEnabled$ | async" class="nav-item"
+        [ngClass]="{ active: currentNav.includes('governance') }" data-qa-id="header-governance">
+        <a class="nav-link d-lg-block d-xl-block cursor-pointer link-footer" routerLink="/governance">
+          <div class="icon-footer-center">
+            <img src="../assets/img/icons/governance-icon.png" width="auto" height="21" alt="Governance image" />
+          </div>
+          <h6 class="mb-0" i18n="@@headerTab.Governance">Governance</h6>
+        </a>
+      </li>
+      <!-- <li class="nav-item" [ngClass]="{ 'active': currentNav.includes('services') }">
+        <a class="nav-link d-lg-block d-xl-block coming-soon link-footer">
+          <div class="icon-footer-center">
+            <img src="../assets/img/icons/services-icon.png" width="auto" height="21" alt="Services image">
+          </div>
+          <h6 class="mb-0">Services</h6>
+        </a>
+      </li> -->
+      <li class="nav-item" [ngClass]="{ active: currentNav.includes('enrolment') }" data-qa-id="header-enrolment">
+        <a class="nav-link d-lg-block d-xl-block cursor-pointer link-footer" routerLink="/enrolment">
+          <div class="icon-footer-center">
+            <img src="../assets/img/icons/credentials-icon.png" width="auto" height="21" alt="Enrolments image" />
+          </div>
+          <h6 class="mb-0" i18n="@@headerTab.Credentials">Credentials</h6>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav flex-row align-items-center profile-wrapper">
+      <!-- <li
+        class="nav-item d-none d-xl-block mr-4"
+        matTooltip="Enabling experimental features will restart the application. You may experience some issues while using the experimental features.">
+        <mat-slide-toggle [checked]="isExperimentalEnabled$ | async" (change)="onExperimentalChange($event)">
+          Enable debug
+        </mat-slide-toggle>
+      </li> -->
+      <app-system-notifications [pendingApprovalCount]="pendingApprovalCount$ | async"
+        [pendingAssetSyncCount]="pendingSyncToDIDCount$ | async"
+        [assetsOfferedToMeCount]="assetsOfferedToMeCount$ | async"></app-system-notifications>
+      <app-user-notifications> </app-user-notifications>
+
+      <!-- <li class="nav-item d-none d-md-block">
+        <a matTooltip="Help" class="nav-link"
+          href="https://energyweb.atlassian.net/wiki/spaces/SWITCH/pages/1712554033/Using+Switchboard" target="_blank">
+          <em class="far fa-lg fa-question-circle"></em>
+        </a>
+      </li> -->
+      <li class="nav-item">
+        <div class="cursor-pointer" [matMenuTriggerFor]="menu" data-qa-id="user-menu">
+          <app-user-menu-trigger [userName]="userName"></app-user-menu-trigger>
+        </div>
+      </li>
+    </ul>
+    <!-- END navbar header-->
+  </nav>
+  <!-- END Top Navbar-->
+  <mat-menu #menu="matMenu" xPosition="before">
+    <div class="border-bottom-1 mt-2">
+      <app-user-name [userName]="userName"></app-user-name>
+      <app-user-did [did]="userDid$ | async"></app-user-did>
+    </div>
+    <button class="color-link px-4 pb-2 border-bottom-1" mat-menu-item (click)="openDialogUser()"
+      data-qa-id="menu-update-identity">
+      <span i18n="@@menu.UpdateIdentity">Update Identity</span>
+    </button>
+    <button class="color-link px-4 pb-2 border-bottom-1" mat-menu-item (click)="openDidBook()"
+      data-qa-id="menu-did-book">
+      <span i18n="@@menu.UpdateDidBook">DID Book</span>
+    </button>
+    <button class="color-link px-4 pb-2 border-bottom-1" mat-menu-item appQrCodeScanner [detect]="true"
+      data-qa-id="menu-qr-code-scanner">
+      <span i18n="@@menu.QrCode.">QR Code Scanner</span>
+    </button>
+    <!-- <ng-container *ngIf="isExperimentalEnabled$ | async">
+      <button class="color-link px-4 pb-2 border-bottom-1 position-relative" mat-menu-item appShowRawData
+        [data]="didDocument$ | async" header="DID Document" data-qa-id="menu-did-document">
+        <span i18n="@@menu.DidDocument">DID Document</span>
+        <mat-icon class="experimental" matTooltip="This feature is experimental"> report_problem</mat-icon>
+      </button>
+    </ng-container> -->
+    <div class="d-block">
+      <div class="d-flex justify-content-between align-items-center my-1 px-4 py-2"
+        matTooltip="Enabling experimental features will restart the application. You may experience some issues while using the experimental features.">
+        <div class="color-link" i18n="@@menu.Experimental">Experimental</div>
+        <mat-slide-toggle [checked]="isExperimentalEnabled$ | async"
+          (change)="onExperimentalChange($event)"></mat-slide-toggle>
+      </div>
+    </div>
+    <button class="d-block d-md-none border-bottom-1 color-link px-4" mat-menu-item (click)="openDialogUser()">
+      <a class="color-link" href="https://energyweb.atlassian.net/wiki/spaces/SWITCH/pages/1712554033/Using+Switchboard"
+        target="_blank">
+        <span i18n="@@menu.Help">Help</span>
+      </a>
+    </button>
+    <button class="color-link px-4" data-qa-id="menu-logout" mat-menu-item (click)="logout()"><span
+        i18n="@@menu.Logout">Logout</span></button>
+  </mat-menu>
+</ng-container>

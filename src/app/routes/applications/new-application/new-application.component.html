@@ -1,0 +1,62 @@
+<h4 mat-dialog-title class="mb-0 d-flex justify-content-between align-items-center">
+  {{ isUpdating ? 'Update' : 'Create' }} Application
+  <button mat-icon-button (click)="closeDialog2(true)">
+    <mat-icon>close</mat-icon>
+  </button>
+</h4>
+
+<div mat-dialog-content>
+  <div class="mb-2 mt-3">
+    <div class="row">
+      <mat-vertical-stepper class="w-100" [linear]="true" #stepper>
+        <ng-template matStepperIcon="edit">
+          <mat-icon>check</mat-icon>
+        </ng-template>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel i18n="@@newApp.UpdateNew"> {{ isUpdating ? 'Update' : 'New' }}
+            Application</ng-template>
+          <app-application-creation-form [data]="origData" [isUpdating]="isUpdating"
+            (cancel)="closeDialog2($event.touched)" (proceed)="update($event)"></app-application-creation-form>
+        </mat-step>
+        <mat-step [editable]="false" [completed]="false">
+          <ng-template matStepLabel i18n="@@newApp.ConfirmDetails">Confirm Details</ng-template>
+          <app-namespace-details *ngIf="applicationData" [namespace]="namespace" [name]="applicationData?.data?.appName"
+            [data]="applicationData.data" type="App" (imageLoaded)="isLogoUrlValid = $event"></app-namespace-details>
+          <div>
+            <div class="d-flex justify-content-end mb-2">
+              <button mat-stroked-button class="btn btn-small mr-2" (click)="cancelAppDetails()"><span
+                  i18n="@@newApp.BtnBack">Back</span></button>
+              <button mat-raised-button class="btn btn-small btn-primary" (click)="confirmApp()"><span
+                  i18n="@@newApp.BtnNext">Next</span></button>
+            </div>
+          </div>
+        </mat-step>
+
+        <ng-container *ngFor="let step of txs; let i = index">
+          <mat-step [editable]="false" [completed]="false">
+            <ng-template matStepLabel>{{ step.info }}</ng-template>
+            <ng-container *ngIf="stepper?.selectedIndex === i + 2">
+              <app-card-info [description]="step.info"></app-card-info>
+              <div
+                class="card card-hint d-flex flex-row justify-content-start align-items-center shadow-none d-flex pt-3 pb-2 mb-3">
+                <mat-icon class="px-2">notifications_none</mat-icon>
+                <span class="pl-3 pb-2" i18n="@@newApp.ConfirmTxMessage"> Please confirm this transaction in your
+                  connected Wallet. </span>
+              </div>
+              <div class="d-flex justify-content-end mb-3">
+                <button mat-stroked-button class="btn btn-small mr-2" (click)="closeDialog()"
+                  i18n="@@newApp.TxConfirmCancel">Cancel</button>
+                <button mat-raised-button class="btn btn-small btn-primary" (appRetryBtn)="retry()"
+                  i18n="@@newApp.TxConfirmRetry">Retry</button>
+              </div>
+            </ng-container>
+          </mat-step>
+        </ng-container>
+        <mat-step [completed]="false">
+          <ng-template matStepLabel i18n="@@newApp.Complete">Complete</ng-template>
+          <app-transactions-complete *ngIf="isCompleted" (completed)="closeDialog(true)"></app-transactions-complete>
+        </mat-step>
+      </mat-vertical-stepper>
+    </div>
+  </div>
+</div>

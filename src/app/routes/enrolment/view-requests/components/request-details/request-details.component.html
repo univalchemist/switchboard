@@ -1,0 +1,27 @@
+<div class="card card-default mb-3 pb-0 shadow-none">
+  <div class="text-left my-3">
+    <div class="label opacity-50 mb-2" i18n="@@enrolment.request.detail.Date">Requested Date</div>
+    <span class="default-color mb-0" data-qa-id="request-date">
+      {{ claim?.requestDate | date: 'MM/dd/yyyy HH:mm:ss' }}
+    </span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="text-left my-3">
+    <div class="label opacity-50 mb-2" i18n="@@enrolment.request.detail.requestor">Requestor</div>
+    <span class="default-color mb-0" data-qa-id="requester-did">{{ claim?.requester }}</span>
+  </div>
+  <ng-container *ngIf="claim?.isAsset()">
+    <mat-divider></mat-divider>
+    <div class="text-left my-3">
+      <div class="label opacity-50 mb-2" i18n="@@enrolment.request.detail.asset">Asset</div>
+      <span class="default-color mb-0" data-qa-id="subject-did">{{ claim?.subject }}</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="claim?.acceptedBy">
+    <mat-divider></mat-divider>
+    <div class="text-left my-3">
+      <div class="label opacity-50 mb-2" data-qa-id="issuer-did" i18n="@@enrolment.request.detail.issuer">Issuer</div>
+      <span class="color-white mb-0">{{ claim?.acceptedBy }}</span>
+    </div>
+  </ng-container>
+</div>

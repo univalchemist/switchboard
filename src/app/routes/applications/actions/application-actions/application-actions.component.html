@@ -1,0 +1,25 @@
+<button mat-menu-item class="btn-color-primary" [disabled]="!application?.containsRoles" data-qa-id="view-roles"
+  (click)="viewRolesHandler()">
+  <mat-icon class="btn-color-primary btn-action-3" svgIcon="view-role-icon"></mat-icon>
+  <span i18n="@@applicationActions.ViewRoles">View Roles</span>
+</button>
+
+<button mat-menu-item class="btn-color-primary" data-qa-id="create-role" (click)="createRole()">
+  <mat-icon class="btn-color-primary btn-action-3" svgIcon="add-role-icon"></mat-icon>
+  <span i18n="@@applicationActions.CreateRole">Create Role</span>
+</button>
+
+<button mat-menu-item class="btn-color-primary" data-qa-id="edit" (click)="edit()">
+  <mat-icon class="btn-color-primary">edit</mat-icon>
+  <span i18n="@@applicationActions.Edit">Edit</span>
+</button>
+
+<button mat-menu-item class="btn-color-primary" data-qa-id="transfer-ownership" (click)="transferOwnership()">
+  <mat-icon class="btn-color-primary btn-action-1" svgIcon="transfer-ownership-icon"></mat-icon>
+  <span i18n="@@applicationActions.TransferOwnership">Transfer Ownership</span>
+</button>
+
+<button mat-menu-item class="btn-color-error" data-qa-id="delete" (click)="delete()">
+  <mat-icon class="btn-color-error">delete_outline</mat-icon>
+  <span i18n="@@applicationActions.Delete">Delete</span>
+</button>
