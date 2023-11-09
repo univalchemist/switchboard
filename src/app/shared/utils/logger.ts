@@ -1,5 +1,5 @@
 import { ILogger, LogLevel, setLogger } from 'iam-client-lib';
-import * as Sentry from '@sentry/angular-ivy';
+import * as Sentry from '@sentry/angular';
 
 export const logger = () => {
   setLogger({

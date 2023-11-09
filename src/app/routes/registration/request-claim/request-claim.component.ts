@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -31,6 +30,7 @@ import { Store } from '@ngrx/store';
 import { logout } from '../../../state/auth/auth.actions';
 import { isUserLoggedIn } from '../../../state/auth/auth.selectors';
 import { filter, take } from 'rxjs/operators';
+import { AuthActions, SettingsSelectors } from '@state';
 import {
   PreconditionCheck,
   preconditionCheck,
@@ -233,7 +233,6 @@ export class RequestClaimComponent implements OnInit, SubjectElements {
 
   async enrolForSelected(e: any) {
     this.roleTypeForm.patchValue({
-      // @ts-ignore
       enrolType: '',
       assetDid: '',
     });
@@ -282,7 +281,6 @@ export class RequestClaimComponent implements OnInit, SubjectElements {
 
       this.displayAlert(
         $localize`Request to enrol as ` +
-          // @ts-ignore
           this.roleTypeForm.value.roleType.name.toUpperCase() +
           $localize` is submitted for review and approval.`,
         'success'
@@ -413,7 +411,6 @@ export class RequestClaimComponent implements OnInit, SubjectElements {
         case SwalButtons.ENROL_FOR_MYSELF:
           this.roleTypeForm.patchValue({
             enrolFor: EnrolForType.ME,
-            // @ts-ignore
             enrolType: '',
           });
           await this.initRoles();
@@ -421,7 +418,6 @@ export class RequestClaimComponent implements OnInit, SubjectElements {
         case SwalButtons.ENROL_FOR_ASSET:
           this.roleTypeForm.patchValue({
             enrolFor: EnrolForType.ASSET,
-            // @ts-ignore
             enrolType: '',
             assetDid: '',
           });
@@ -453,7 +449,6 @@ export class RequestClaimComponent implements OnInit, SubjectElements {
       }
     } else {
       this.roleTypeForm.patchValue({
-        // @ts-ignore
         enrolType: '',
       });
     }
@@ -671,7 +666,6 @@ export class RequestClaimComponent implements OnInit, SubjectElements {
     if (params.assetDid) {
       this.roleTypeForm.patchValue({
         enrolFor: EnrolForType.ASSET,
-        // @ts-ignore
         enrolType: '',
         assetDid: params.assetDid,
       });

@@ -2,7 +2,7 @@
   <ng-container *ngIf="fieldList.length">
     <div class="row">
       <!-- START: Dynamic Form Fields -->
-      <ng-container *ngFor="let field of enrolmentForm?.get('fields')['controls']; let i = index">
+      <ng-container *ngFor="let field of enrolmentForm?.get('fields')?.controls; let i = index">
         <div [ngClass]="{
             'col-lg-12':
               fieldList[i].fieldType === 'text' ||

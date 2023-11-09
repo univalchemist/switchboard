@@ -2,7 +2,7 @@
   <mat-icon>info</mat-icon>
   <div class="d-flex flex-column">
     <mat-label i18n="@@validityPeriod.Default">Default validity period</mat-label>
-    <div class="f-14" data-qa-id="time-duration">{{ this.form.getRawValue() | timeDuration }}</div>
+    <div class="f-14" data-qa-id="time-duration">{{ this.form.value | timeDuration }}</div>
   </div>
 </div>
 <div class="card card-default d-flex shadow-none d-flex pt-3 mb-3">

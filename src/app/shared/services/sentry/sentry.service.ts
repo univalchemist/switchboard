@@ -1,8 +1,8 @@
 import { APP_INITIALIZER, ErrorHandler, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EnvService } from '../env/env.service';
-import { BrowserTracing } from '@sentry/browser';
-import * as Sentry from '@sentry/angular-ivy';
+import { BrowserTracing } from '@sentry/tracing';
+import * as Sentry from '@sentry/angular';
 
 @Injectable()
 export class SentryService {

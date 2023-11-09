@@ -2,10 +2,10 @@ import { LayoutComponent } from '../layout/layout.component';
 import { AuthGuard } from '../shared/services/auth.guard';
 import { RequestClaimComponent } from './registration/request-claim/request-claim.component';
 import { NgModule } from '@angular/core';
-import { NoPreloading, Route, RouterModule } from '@angular/router';
+import { NoPreloading, RouterModule } from '@angular/router';
 import { RouterConst } from './router-const';
 
-export const routes: Route[] = [
+export const routes = [
   {
     path: '',
     component: LayoutComponent,
@@ -78,6 +78,7 @@ export const routes: Route[] = [
   imports: [
     RouterModule.forRoot(routes, {
       onSameUrlNavigation: 'reload',
+      relativeLinkResolution: 'legacy',
       useHash: false,
       preloadingStrategy: NoPreloading,
     }),

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "new-sb": {
+    "switchboard-dapp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,6 @@
               "@gnosis.pm/safe-apps-sdk",
               "iam-client-lib"
             ],
-            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -107,6 +106,73 @@
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
             },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stg.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "15mb",
+                  "maximumError": "30mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "stedin": {
+              "assets": [
+                "src/assets"
+              ],
+              "index": {
+                "input": "src/index.stedin.html",
+                "output": "index.html"
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stedin.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "15mb",
+                  "maximumError": "30mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "localize": [
+                "std"
+              ]
+            },
             "development": {
               "budgets": [
                 {
@@ -121,20 +187,20 @@
               ]
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "new-sb:build",
+            "browserTarget": "switchboard-dapp:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "new-sb:build:production"
+              "browserTarget": "switchboard-dapp:build:production"
             },
             "development": {
-              "browserTarget": "new-sb:build:development"
+              "browserTarget": "switchboard-dapp:build:development"
             },
             "hu": {
               "browserTarget": "switchboard-dapp:build:hu"
@@ -145,7 +211,7 @@
         "extract-i18n": {
           "builder": "@angular-builders/custom-webpack:extract-i18n",
           "options": {
-            "browserTarget": "new-sb:build"
+            "browserTarget": "switchboard-dapp:build"
           }
         },
         "test": {
@@ -157,16 +223,7 @@
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "karmaConfig": "karma.conf.js"
           }
         },
         "lint": {
@@ -181,5 +238,9 @@
         }
       }
     }
+  },
+  "defaultProject": "switchboard-dapp",
+  "cli": {
+    "analytics": false
   }
 }

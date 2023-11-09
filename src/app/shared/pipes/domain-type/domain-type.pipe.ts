@@ -10,7 +10,7 @@ const domainTypeMap = new Map<DomainTypeEnum, string>()
   name: 'domainType',
 })
 export class DomainTypePipe implements PipeTransform {
-  transform(value: DomainTypeEnum): string {
+  transform(value: DomainTypeEnum): unknown {
     if (domainTypeMap.has(value)) {
       return domainTypeMap.get(value);
     }

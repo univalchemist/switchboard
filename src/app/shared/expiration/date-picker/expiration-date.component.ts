@@ -19,7 +19,7 @@ export class ExpirationDateComponent implements OnInit, OnDestroy {
   /**
    * Defined in milliseconds.
    */
-  @Input() set defaultValidityPeriod(period: number | undefined) {
+  @Input() set defaultValidityPeriod(period: number) {
     if (!period) {
       return;
     }
@@ -85,7 +85,7 @@ export class ExpirationDateComponent implements OnInit, OnDestroy {
   setDefaultExpirationDate(): void {
     if (this.defaultValidityPeriod) {
       this.expirationDate.setValue(
-        new Date(Date.now() + this.defaultValidityPeriod).toDateString()
+        new Date(Date.now() + this.defaultValidityPeriod)
       );
       this.expirationTimeShift = this.defaultValidityPeriod;
     }

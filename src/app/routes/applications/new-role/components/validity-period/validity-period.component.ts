@@ -40,7 +40,7 @@ export class ValidityPeriodComponent {
     if (this.form.invalid) {
       return;
     }
-    const theValue = new Timestamp().parseToMilliseconds(this.form.getRawValue());
+    const theValue = new Timestamp().parseToMilliseconds(this.form.value);
     this.next.emit(theValue);
   }
 }

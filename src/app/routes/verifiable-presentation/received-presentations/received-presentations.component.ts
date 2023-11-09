@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ICredentialTableData } from '../models/credential-table-data.interface';
-import { IVerifiableCredential } from '@sphereon/ssi-types';
+import { IVerifiableCredential } from '@sphereon/pex';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-received-presentations',
@@ -18,8 +19,7 @@ export class ReceivedPresentationsComponent {
   displayedColumns: string[] = ['descriptor', 'verification'];
   dataSource = new MatTableDataSource<unknown>([]);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handleCredentialUpdate(data: any) {
+  handleCredentialUpdate(data: MatSelect) {
     this.requiredCredentials[data?.value?.descriptor] = data?.value?.credential;
   }
 }

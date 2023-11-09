@@ -19,11 +19,11 @@
                 (scannedValue)="scannedValue($event.data?.did)">
                 <mat-icon>qr_code_2</mat-icon>
               </button>
-              <mat-error *ngIf="getFormSubject()?.hasError('required')">
+              <mat-error *ngIf="getFormSubject().hasError('required')">
                 <span i18n="@@newIssue.SubjectIs">Subject is </span>
                 <strong i18n="@@newIssue.SubjectRequired">required</strong>
               </mat-error>
-              <mat-error *ngIf="getFormSubject()?.hasError('invalidDid')" i18n="@@newIssue.InvalidFormat"> Subject DID
+              <mat-error *ngIf="getFormSubject().hasError('invalidDid')" i18n="@@newIssue.InvalidFormat"> Subject DID
                 format is invalid</mat-error>
             </mat-form-field>
           </div>
@@ -44,7 +44,7 @@
       </div>
       <ng-container *ngIf="isPrecheckSuccess">
         <app-expiration-date data-qa-id="expiration-date"
-          [defaultValidityPeriod]="selectedRoleDefinition.defaultValidityPeriod"
+          [defaultValidityPeriod]="selectedRoleDefinition?.defaultValidityPeriod"
           (add)="setExpirationTimeUsingValidity($event)" (remove)="clearExpirationDate()">
         </app-expiration-date>
       </ng-container>

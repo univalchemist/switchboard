@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Claim,
   isRoleCredential,
@@ -24,7 +23,6 @@ export class EnrolmentClaim
 
   isRevokedOnChain: boolean;
   isRevokedOffChain: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   decodedToken: string | { [key: string]: any };
   createdAt: string;
   status: FilterStatus;

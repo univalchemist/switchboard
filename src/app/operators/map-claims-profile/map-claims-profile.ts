@@ -11,7 +11,7 @@ export function mapClaimsProfile() {
           .filter((claim) => !!claim.profile)
           .reduce(
             (prev, next) => {
-              const isPrevNewerClaim = Number(prev.iat) > Number(next.iat);
+              const isPrevNewerClaim = prev.iat > next.iat;
               return isPrevNewerClaim ? prev : next;
             },
             { iat: 0 }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { JsonObject } from '@angular-devkit/core';
 
 @Component({
   selector: 'app-raw-data',
@@ -7,7 +8,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RawDataComponent {
-  @Input() data: object | string;
+  @Input() data: JsonObject;
   @Input() message: string;
 
   get stringifyData() {

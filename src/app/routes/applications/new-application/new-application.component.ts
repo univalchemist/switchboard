@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -278,7 +277,6 @@ export class NewApplicationComponent
     const returnSteps =
       this.origData.owner === this.iamService.signerService.address;
     try {
-      // @ts-ignore
       const call = this.iamService.domainsService.createApplication({
         ...req,
         appName: req.name,

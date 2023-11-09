@@ -14,7 +14,7 @@
         </ng-template>
         <mat-step [completed]="false" *ngIf="isCreatingNew">
           <ng-template matStepLabel i18n="@@newRole.NewRole">New Role</ng-template>
-          <app-role-name [roleType]="$any(roleType)" [parentNamespace]="parentNamespace"
+          <app-role-name [roleType]="roleType" [parentNamespace]="parentNamespace"
             (proceed)="proceedSettingIssuer($event)" (cancel)="confirmClose($event.touched)"></app-role-name>
         </mat-step>
         <mat-step [completed]="false">
@@ -62,7 +62,7 @@
             <div class="row mt-2">
               <div class="col-lg-12">
                 <app-smart-search [placeholderSearch]="'Search Role Namespace (Optional)'"
-                  [searchText]="restrictionRoleControl" [searchType]="SmartSearchEnum.Add"
+                  [searchText]="restrictionRoleControl" searchType="add"
                   (add)="addRestriction($event)"></app-smart-search>
               </div>
             </div>
@@ -129,7 +129,7 @@
             <div class="text-left my-3">
               <div class="label opacity-50 mb-2" i18n="@@newRole.IssuerType">Issuer Type</div>
               <span class="default-color mb-0">
-                <!-- {{ roleForm?.value?.data?.issuer?.issuerType }} -->
+                {{ roleForm?.value?.data?.issuer?.issuerType }}
               </span>
             </div>
             <mat-divider></mat-divider>

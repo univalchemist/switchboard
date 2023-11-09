@@ -1,4 +1,3 @@
-import { JsonObject } from '@angular-devkit/core';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -11,7 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class RawDataDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    private data: { dataToDisplay: JsonObject; header: string }
+    private data: { dataToDisplay: unknown; header: string }
   ) {}
 
   get header() {

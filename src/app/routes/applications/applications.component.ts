@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AfterViewInit,
   Component,
@@ -26,7 +25,7 @@ import {
 import { OrganizationListComponent } from './organization-list/organization-list.component';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { RoleListComponent } from './role-list/role-list.component';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatTabChangeEvent } from '@angular/material/tabs/tab-group';
 import { EnvService } from '../../shared/services/env/env.service';
 import { RouterConst } from '../router-const';
 

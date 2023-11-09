@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AfterViewInit,
@@ -38,7 +37,7 @@ import { RoleCreationService } from './services/role-creation.service';
 import { ISmartSearch } from '../../../shared/components/smart-search/models/smart-search.interface';
 import { SmartSearchType } from '../../../shared/components/smart-search/models/smart-search-type.enum';
 import { IssuerType } from './models/issuer-type.enum';
-import { CreateRoleOptions } from 'iam-client-lib';
+import { CreateRoleOptions } from 'iam-client-lib/dist/src/modules/domains/domains.types';
 import { IRoleType } from './models/role-type.interface';
 
 export const RoleType = {
@@ -67,7 +66,6 @@ export interface RolesFields {
 })
 export class NewRoleComponent implements OnInit, AfterViewInit {
   private stepper: MatStepper;
-  SmartSearchEnum = SmartSearchType
 
   @ViewChild('stepper') set content(content: MatStepper) {
     if (content) {
@@ -253,7 +251,6 @@ export class NewRoleComponent implements OnInit, AfterViewInit {
       this.requestorFields.data = this.getRequestorFieldsFromDefinition(def);
       this.issuerFields.data = def?.issuerFields ? [...def.issuerFields] : [];
       this.roleForm.patchValue({
-        // @ts-ignore
         roleType: def.roleType,
         parentNamespace,
         roleName: def.roleName,
@@ -270,7 +267,6 @@ export class NewRoleComponent implements OnInit, AfterViewInit {
 
     this.roleForm.valueChanges.subscribe((value) => {
       if (typeof value.roleName !== 'string') {
-        // @ts-ignore
         this.roleName = value.roleName.namespace;
       } else {
         this.roleName = value.roleName;
@@ -312,7 +308,6 @@ export class NewRoleComponent implements OnInit, AfterViewInit {
       if (enrolmentPreconditions.length) {
         enrolmentPreconditions[0].conditions.push(event.value);
       } else {
-        // @ts-ignore
         this.roleForm.get('data').patchValue({
           enrolmentPreconditions: [
             { type: PreconditionType.Role, conditions: [event.value] },

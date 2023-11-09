@@ -2,7 +2,7 @@ import { IAppDefinition } from 'iam-client-lib';
 
 export interface AppCreationDefinition {
   orgNamespace: string;
-  data?: IAppDefinition;
+  data: IAppDefinition;
   domain?: string;
   name?: string;
 }

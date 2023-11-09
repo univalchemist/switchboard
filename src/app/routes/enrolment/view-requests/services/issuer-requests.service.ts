@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EnrolmentClaim } from '../../models/enrolment-claim';
-import { IssueClaimRequestOptions } from 'iam-client-lib';
+import { IssueClaimRequestOptions } from 'iam-client-lib/dist/src/modules/claims/claims.types';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { SwitchboardToastrService } from '../../../../shared/services/switchboard-toastr.service';

@@ -6,6 +6,7 @@ import {
   ClaimsService,
   DidRegistry,
   DomainsService,
+  ILogger,
   initWithEKC,
   initWithGnosis,
   initWithMetamask,
@@ -13,16 +14,20 @@ import {
   initWithWalletConnect,
   IRole,
   IRoleDefinitionV2,
+  LogLevel,
   MessagingMethod,
   MessagingService,
   NamespaceType,
   ProviderType,
   setCacheConfig,
   setChainConfig,
+  setLogger,
   setMessagingConfig,
   SignerService,
   VerifiableCredentialsServiceBase,
 } from 'iam-client-lib';
+import * as Sentry from '@sentry/angular';
+import { Severity } from '@sentry/angular';
 import { LoadingService } from './loading.service';
 import { safeAppSdk } from './gnosis.safe.service';
 import { from, Observable } from 'rxjs';
@@ -30,10 +35,10 @@ import { LoginOptions } from './login/login.service';
 import { truthy } from '@operators';
 import { finalize, map } from 'rxjs/operators';
 import { EnvService } from './env/env.service';
-import { ChainConfig } from 'iam-client-lib';
+import { ChainConfig } from 'iam-client-lib/dist/src/config/chain.config';
 import { EkcSettingsService } from '../../modules/connect-to-wallet/ekc-settings/services/ekc-settings.service';
-import { IOrganization } from 'iam-client-lib';
-import { IssueClaimOptions } from 'iam-client-lib';
+import { IOrganization } from 'iam-client-lib/dist/src/modules/domains/domains.types';
+import { IssueClaimOptions } from 'iam-client-lib/dist/src/modules/claims/claims.types';
 import { logger } from '../utils/logger';
 import { SentryService } from './sentry/sentry.service';
 

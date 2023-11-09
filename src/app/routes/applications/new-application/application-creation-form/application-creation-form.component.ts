@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
@@ -109,7 +108,6 @@ export class ApplicationCreationFormComponent
     }
     this.proceed.emit({
       domain: this.namespace,
-      //@ts-ignore
       data: {
         ...this.appForm.value.data,
         others: this.appForm.value.data?.others
