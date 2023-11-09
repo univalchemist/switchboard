@@ -17,8 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-npm version 6+
-nodejs version 10+
+nodejs version 16+
 ```
 
 ### Installing
