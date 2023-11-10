@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import mapboxgl from 'mapbox-gl';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AssetsRegisterService } from 'src/app/shared/services/assets-register/assets-register.service';
+import { EnvService } from 'src/app/shared/services/env/env.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 
 const WirelessPodType = {
@@ -43,18 +45,46 @@ export class RegisterAssetComponent implements OnInit {
   public isPrecheckSuccess = false;
 
   apiLoaded: Observable<boolean>;
+  srcResult: any;
+  selectedImage: string;
+  pictures: any[]=[];
 
+  map: mapboxgl.Map;
+  style = 'mapbox://styles/mapbox/streets-v11';
+  lat = 37.75;
+  lng = -122.41;
+  editMapOn:boolean;
+  locationMarker:any;
   constructor(
     private fb: FormBuilder,
     private loadingService: LoadingService,
     private assetRegisterService: AssetsRegisterService,
-    httpClient: HttpClient
+    httpClient: HttpClient,
+    private envService: EnvService
   ) {
   }
 
   ngOnInit(): void {
-    //todo
-    console.log("todo")
+    mapboxgl.accessToken = this.envService.MAP_BOX_TOKEN;
+      this.map = new mapboxgl.Map({
+        container: 'map',
+        style: this.style,
+        zoom: 18,
+        center: [this.lng, this.lat]
+    });
+    this.map.on('click', (e) => {
+      if(this.editMapOn) {
+        if(this.locationMarker) { 
+          this.locationMarker.remove();
+        }
+        this.locationMarker = new mapboxgl.Marker().setLngLat([e?.lngLat?.lat, e?.lngLat?.lng]).addTo(this.map);
+      }
+     
+    })
+  }
+
+  toggleEdit() {
+    this.editMapOn = !this.editMapOn;
   }
 
   async enrolForSelected(e: any) {
@@ -86,6 +116,12 @@ export class RegisterAssetComponent implements OnInit {
     const wirelessForm = res.assetTree.find((item) => item.assetType === 'wireless pod');
     const solarForm = res.assetTree.find((item) => item.assetType === 'solar powerplant');
     const energyForm = res.assetTree.find((item) => item.assetType === 'energymeter');
+    console.log(solarForm?.assetType);
+    
+    if(solarForm?.assetType){
+      this.pictures = solarForm?.pictures
+
+    }
     this.assetForm.patchValue({
       wirelessType: wirelessForm.assetSpec.model,
       wirelessSn: wirelessForm.assetSpec.sn,
@@ -107,6 +143,22 @@ export class RegisterAssetComponent implements OnInit {
       energyType: energyForm.assetSpec.model,
       energySn: solarForm.assetSpec.sn,
     });
+  }
+
+  onFileSelected(target:any) {
+    const chooseFile = target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(chooseFile);
+    reader.onload = (event) => {
+        this.selectedImage = event.target.result as string;
+        this.pictures.push(this.selectedImage)
+      };
+  }
+
+  removeImage(idx){
+    if(idx >= 0 && idx < this.pictures.length){
+      this.pictures.splice(idx,1)
+    }
   }
 
 }
