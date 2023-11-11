@@ -88,8 +88,7 @@
                     <p class="Inverter">Location</p>
                   </div>
                   <div class="map">
-                    <!-- <img src="assets/img/map.png" alt=""> -->
-                    <div class="map" id="map" class="match-parent"></div>
+                    <app-mapbox-elm [toShowSearch]="editMapOn" (pickedLocation)="changeLocation($event)" [allowPickLocation]="editMapOn"></app-mapbox-elm>
                   </div>
                   <a href="javascript:void(0)" class="edit-a" (click)="toggleEdit()"> <img src="assets/img/edit-location.png" alt="" > {{editMapOn ? 'Save' : 'Edit'}} location</a>
                   <div class="margin-15">
@@ -98,7 +97,7 @@
                       <ul class="ul-grid">
                         <li *ngFor="let item of pictures; let i=index">
                           <img class="slider-img" src="{{item}}" alt="">
-                          <span class="d-flex error-text" (click)="removeImage(i)"><img class="delete-img" src="assets/img/delete.png" alt="">Remove</span>
+                          <span class="remove-btn" (click)="removeImage(i)"><img class="delete-img" src="assets/img/delete.png" alt="">Remove</span>
                         </li>
                       </ul>
                     </div>

@@ -306,11 +306,16 @@ img.slider-img {
   height: 80px;
   object-fit: cover;
 }
-img.delete-img {
-  width: 20px;
-  margin: auto;
-  display: block;
-  margin-top: 6px;
+.remove-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #B42318!important;
+  margin-top: 3px;
+  font-size: 16px;
+  img.delete-img {
+    width: 20px;
+  }
 }
 .error-text{
   color: #B42318 !important;
@@ -319,8 +324,8 @@ img.delete-img {
 
 /* scrollbar */
 .div-over-flow::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+  width: 2px;
+  height: 2px;
 }
 
 .match-parent {

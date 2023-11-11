@@ -31,6 +31,7 @@ import { RouterConst } from '../router-const';
 import { AssetEnrolmentListComponent } from './asset-enrolment-list/asset-enrolment-list.component';
 import { EnrolmentListModule } from '../enrolment/enrolment-list/enrolment-list.module';
 import { RegisterAssetComponent } from './register-asset/register-asset.component';
+import { MapboxElmModule } from 'src/app/layout/components/mapbox-elm/mapbox-elm.module';
 
 const routes: Routes = [
   { path: '', component: AssetsComponent },
@@ -77,6 +78,7 @@ const routes: Routes = [
     ClipboardModule,
     QrCodeScannerModule,
     EnrolmentListModule,
+    MapboxElmModule
   ],
 })
 export class AssetsModule {}

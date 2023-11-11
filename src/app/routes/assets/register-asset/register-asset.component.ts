@@ -1,12 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import mapboxgl from 'mapbox-gl';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { AssetsRegisterService } from 'src/app/shared/services/assets-register/assets-register.service';
-import { EnvService } from 'src/app/shared/services/env/env.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
+
 
 const WirelessPodType = {
   ModbusRTU: 'ModbusRTU',
@@ -48,39 +45,23 @@ export class RegisterAssetComponent implements OnInit {
   srcResult: any;
   selectedImage: string;
   pictures: any[]=[];
-
-  map: mapboxgl.Map;
-  style = 'mapbox://styles/mapbox/streets-v11';
-  lat = 37.75;
-  lng = -122.41;
   editMapOn:boolean;
   locationMarker:any;
   constructor(
     private fb: FormBuilder,
     private loadingService: LoadingService,
     private assetRegisterService: AssetsRegisterService,
-    httpClient: HttpClient,
-    private envService: EnvService
   ) {
   }
 
   ngOnInit(): void {
-    mapboxgl.accessToken = this.envService.MAP_BOX_TOKEN;
-      this.map = new mapboxgl.Map({
-        container: 'map',
-        style: this.style,
-        zoom: 18,
-        center: [this.lng, this.lat]
-    });
-    this.map.on('click', (e) => {
-      if(this.editMapOn) {
-        if(this.locationMarker) { 
-          this.locationMarker.remove();
-        }
-        this.locationMarker = new mapboxgl.Marker().setLngLat([e?.lngLat?.lat, e?.lngLat?.lng]).addTo(this.map);
-      }
-     
-    })
+    
+  }
+
+  changeLocation(event:any) {
+    if(event.longitude && event.latitude) {
+      this.locationMarker = event;
+    }
   }
 
   toggleEdit() {
