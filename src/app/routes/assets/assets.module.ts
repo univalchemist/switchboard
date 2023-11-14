@@ -34,6 +34,11 @@ import { RegisterAssetComponent } from './register-asset/register-asset.componen
 import { MapboxElmModule } from 'src/app/layout/components/mapbox-elm/mapbox-elm.module';
 import { SolarDetailsComponent } from './solar-details/solar-details.component';
 import { EnergymeterDetailsComponent } from './energymeter-details/energymeter-details.component';
+import { MatListModule } from '@angular/material/list';
+import { PopupSolarComponent } from './popup-solar/popup-solar.component';
+import {
+  MatBottomSheetModule,
+} from '@angular/material/bottom-sheet';
 
 const routes: Routes = [
   { path: '', component: AssetsComponent },
@@ -61,6 +66,7 @@ const routes: Routes = [
     RegisterAssetComponent,
     SolarDetailsComponent,
     EnergymeterDetailsComponent,
+    PopupSolarComponent,
   ],
   imports: [
     CommonModule,
@@ -82,7 +88,9 @@ const routes: Routes = [
     ClipboardModule,
     QrCodeScannerModule,
     EnrolmentListModule,
-    MapboxElmModule
+    MapboxElmModule,
+    MatListModule,
+    MatBottomSheetModule
   ],
 })
 export class AssetsModule {}

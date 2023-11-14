@@ -23,3 +23,13 @@
 textarea.jsoneditor-text {
   min-height: 500px;
 }
+span.mat-expansion-indicator::after {
+  color: #000 !important;
+}
+
+mat-checkbox {
+  opacity: 1 !important; 
+}
+.custom-width{
+  max-width: 420px !important;
+}
