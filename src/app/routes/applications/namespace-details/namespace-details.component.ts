@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IAppDefinition } from 'iam-client-lib';
+// import { IAppDefinition } from 'iam-client-lib';
 
 @Component({
   selector: 'app-namespace-details',
@@ -17,7 +18,8 @@ export class NamespaceDetailsComponent {
   @Input() namespace: string;
   @Input() name: string;
   @Input() type: 'App' | 'Org';
-  @Input() data: IAppDefinition;
+  @Input() data: any;
+  // @Input() data: IAppDefinition;
 
   @Output() imageLoaded = new EventEmitter<boolean>();
 

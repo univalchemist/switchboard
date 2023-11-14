@@ -32,7 +32,6 @@ module.exports = {
       SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN),
       INFURA_PROJECT_ID: JSON.stringify(process.env?.INFURA_PROJECT_ID),
       INFURA_PROJECT_SECRET: JSON.stringify(process.env?.INFURA_PROJECT_SECRET),
-      MAP_BOX_TOKEN: JSON.stringify(process.env?.MAP_BOX_TOKEN),
     }),
     new Dotenv(),
   ],

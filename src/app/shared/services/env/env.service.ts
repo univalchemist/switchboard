@@ -28,5 +28,5 @@ export class EnvService {
   backendUrl: string = environment.backendUrl;
   authUsername: string = environment.authUsername;
   authPassword: string = environment.authPassword;
-  MAP_BOX_TOKEN:string =  process?.env?.MAP_BOX_TOKEN;
+  mapBoxToken:string =  environment.mapBoxToken;
 }

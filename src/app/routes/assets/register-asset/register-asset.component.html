@@ -8,13 +8,9 @@
               <div class="back-div">
                 <p class="bk-arrow"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
               </div>
-              <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr" (click)="test()">
+              <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr" appQrCodeScanner (scannedValue)="handleScannedValue($event.data)">
                 <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
               </button>
-              <div class="con-p">
-                <p class="PodID">Pod ID</p>
-                <p class="PodID-1">ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm</p>
-              </div>
             </div>
           </div>
           <form role="form" [formGroup]="assetForm">
@@ -117,8 +113,8 @@
                 </div>
 
                 <div class="enrol-save text-center">
-                  <button mat-raised-button class="btn btn-primary md-enroll"><span i18n="@@register.asset.enroll">Enroll</span></button>
-                  <button mat-raised-button class="btn btn-primary md-enroll ml-2 primary"><span i18n="@@register.asset.save">Save</span></button>
+                  <button mat-raised-button class="btn btn-primary md-enroll" (click)="onSave()"><span i18n="@@register.asset.enroll">Enroll</span></button>
+                  <button mat-raised-button class="btn btn-primary md-enroll ml-2 primary" (click)="onSave()"><span i18n="@@register.asset.save">Save</span></button>
                 </div>
               </div>
             </div>

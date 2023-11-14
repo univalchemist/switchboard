@@ -4,10 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssetListType } from '../../shared/constants/shared-constants';
 import { UrlParamService } from '../../shared/services/url-param.service';
 import { AssetListComponent } from './asset-list/asset-list.component';
-import { NewPassiveAssetComponent } from './new-passive-asset/new-passive-asset.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTabGroup } from '@angular/material/tabs';
-import { RouterConst } from '../router-const';
 
 @Component({
   selector: 'app-assets',
@@ -54,7 +52,7 @@ export class AssetsComponent implements AfterViewInit {
   }
 
   registerAsset() {
-    const dialogRef = this.dialog.open(NewPassiveAssetComponent, {
+    /* const dialogRef = this.dialog.open(NewPassiveAssetComponent, {
       width: '600px',
       data: {},
       maxWidth: '100%',
@@ -78,7 +76,9 @@ export class AssetsComponent implements AfterViewInit {
             },
           });
         }
-      });
+      }); */
+
+    this.router.navigate(['assets/register']);
   }
 
   async showMe(i: any) {

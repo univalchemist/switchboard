@@ -31,7 +31,7 @@ export class MapboxElmComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    mapboxgl.accessToken = this.envService.MAP_BOX_TOKEN;
+    mapboxgl.accessToken = this.envService.mapBoxToken;
     this.map = new mapboxgl.Map({
       container: 'map1',
       style: this.style,
@@ -69,7 +69,7 @@ export class MapboxElmComponent implements OnInit{
 
   addSearchBox() {
     this.searchBox = new MapboxSearchBox();
-    this.searchBox.accessToken = this.envService.MAP_BOX_TOKEN;
+    this.searchBox.accessToken = this.envService.mapBoxToken;
     this.searchBox.marker = false;
     this.searchBox.mapboxgl = mapboxgl;
     console.log(this.searchBox)

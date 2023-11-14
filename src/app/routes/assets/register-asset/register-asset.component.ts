@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -83,15 +84,10 @@ export class RegisterAssetComponent implements OnInit {
   roleTypeSelected(e: any) {
     // todo
   }
-
-  handleScannedValue(data: any) {
-    // todo
+  async handleScannedValue(data: any) {
     console.log('handleScannedValue: ', data)
-  }
-
-  async test() {
     this.loadingService.show();
-    const res: any = await this.assetRegisterService.getAssetDetail('ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm');
+    const res: any = await this.assetRegisterService.getAssetDetail(data);
     this.loadingService.hide();
     console.log('getAssetDetail: ', res);
     const wirelessForm = res.assetTree.find((item) => item.assetType === 'wireless pod');
@@ -126,7 +122,7 @@ export class RegisterAssetComponent implements OnInit {
     });
   }
 
-  onFileSelected(target:any) {
+  onFileSelected(target: any) {
     const chooseFile = target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(chooseFile);
@@ -140,6 +136,12 @@ export class RegisterAssetComponent implements OnInit {
     if(idx >= 0 && idx < this.pictures.length){
       this.pictures.splice(idx,1)
     }
+  }
+
+  async onSave() {
+    this.loadingService.show();
+    await this.assetRegisterService.registerAsset();
+    this.loadingService.hide();
   }
 
 }
