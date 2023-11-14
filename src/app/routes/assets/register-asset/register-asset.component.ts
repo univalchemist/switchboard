@@ -87,6 +87,7 @@ export class RegisterAssetComponent implements OnInit {
   async handleScannedValue(data: any) {
     console.log('handleScannedValue: ', data)
     this.loadingService.show();
+    // ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm
     const res: any = await this.assetRegisterService.getAssetDetail(data);
     this.loadingService.hide();
     console.log('getAssetDetail: ', res);
