@@ -32,6 +32,8 @@ import { AssetEnrolmentListComponent } from './asset-enrolment-list/asset-enrolm
 import { EnrolmentListModule } from '../enrolment/enrolment-list/enrolment-list.module';
 import { RegisterAssetComponent } from './register-asset/register-asset.component';
 import { MapboxElmModule } from 'src/app/layout/components/mapbox-elm/mapbox-elm.module';
+import { SolarDetailsComponent } from './solar-details/solar-details.component';
+import { EnergymeterDetailsComponent } from './energymeter-details/energymeter-details.component';
 
 const routes: Routes = [
   { path: '', component: AssetsComponent },
@@ -57,6 +59,8 @@ const routes: Routes = [
     TypeAlgorithmPipe,
     AssetDetailsComponent,
     RegisterAssetComponent,
+    SolarDetailsComponent,
+    EnergymeterDetailsComponent,
   ],
   imports: [
     CommonModule,

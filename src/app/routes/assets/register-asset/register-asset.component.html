@@ -2,13 +2,17 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="form-full">
+        <!-- main page -->
+        <div class="form-full" *ngIf="!showDetails">
           <div class="row">
             <div class="col-lg-12">
               <div class="back-div">
                 <p class="bk-arrow"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
               </div>
-              <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr" appQrCodeScanner (scannedValue)="handleScannedValue($event.data)">
+              <!-- <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr" appQrCodeScanner (scannedValue)="handleScannedValue($event.data)">
+                <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
+              </button> -->
+              <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr"  (click)="handleScannedValue('ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm')">
                 <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
               </button>
             </div>
@@ -58,7 +62,7 @@
                     <p class="wire-pod">Solar powerplant</p>
                     <div class="config">
                       <button class="Configure-bt comp">Completed</button>
-                      <img src="assets/img/arrow-right.png" class="arrow-right" alt="">
+                      <img (click)="openDetails('solar powerplant')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
                     </div>
                   </div>
                   <div class="col-lg-12 p-0">
@@ -107,7 +111,7 @@
                     <p class="wire-pod">Energymeter</p>
                     <div class="config">
                       <button class="Configure-bt comp">Completed</button>
-                      <img src="assets/img/arrow-right.png" class="arrow-right" alt="">
+                      <img src="assets/img/arrow-right.png" class="arrow-right" alt="" (click)="openDetails('energymeter')">
                     </div>
                   </div>
                 </div>
@@ -119,6 +123,31 @@
               </div>
             </div>
           </form>
+        </div>
+
+        <!-- Solar-Details -->
+      <div class="form-full" *ngIf="showDetails == 'solar powerplant'">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="back-div d-flex justify-content-between">
+                <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
+                <button class="Configure-bt comp sm-bt">Completed</button>
+            </div>
+          </div>
+          <app-solar-details [solarDetails]="solarDetails"></app-solar-details>
+        </div>
+      </div>
+
+      <!-- EnergyMeter -->
+      <div class="form-full" *ngIf="showDetails == 'energymeter'">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="back-div d-flex justify-content-between">
+                <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
+                <button class="Configure-bt comp sm-bt">Config</button>
+            </div>
+          </div>
+          <app-energymeter-details></app-energymeter-details>
         </div>
       </div>
     </div>

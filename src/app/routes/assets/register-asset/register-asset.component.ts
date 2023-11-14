@@ -48,6 +48,8 @@ export class RegisterAssetComponent implements OnInit {
   pictures: any[]=[];
   editMapOn:boolean;
   locationMarker:any;
+  showDetails:string = '';
+  solarDetails:any;
   constructor(
     private fb: FormBuilder,
     private loadingService: LoadingService,
@@ -57,6 +59,13 @@ export class RegisterAssetComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  openDetails(panel:string) {
+    // panel : 'solar powerplant' | 'energymeter'
+    if(this.showDetails != panel) {
+      this.showDetails = panel;
+    }
   }
 
   changeLocation(event:any) {
@@ -95,6 +104,7 @@ export class RegisterAssetComponent implements OnInit {
     const solarForm = res.assetTree.find((item) => item.assetType === 'solar powerplant');
     const energyForm = res.assetTree.find((item) => item.assetType === 'energymeter');
     console.log(solarForm?.assetType);
+    this.solarDetails = solarForm; 
     
     if(solarForm?.assetType){
       this.pictures = solarForm?.pictures
