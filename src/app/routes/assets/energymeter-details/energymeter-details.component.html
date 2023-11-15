@@ -1,1 +1,39 @@
-<p>energymeter-details works!</p>
+<div class="new-design">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- main page -->
+                <div class="form-full">
+                    <form role="form" [formGroup]="energyMeterForm">
+
+                        <div class="col-lg-12">
+                            <div class="col-lg-12 p-0">
+                                <mat-label class="" i18n="@@register.asset">Type</mat-label>
+                                <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                                <mat-select class="md-enroll" placeholder="Please select type" formControlName="type"
+                                    >
+                                    <mat-option class="md-enroll" >ModbusRTU</mat-option>
+                                </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12 p-0">
+                                <mat-label class="" i18n="@@register.asset.serial">Serial number</mat-label>
+                                <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                                    <input matInput autocomplete="off" type="text"
+                                        i18n-placeholder="@@register.asset.serialNumber.placeholder"
+                                        placeholder="Enter serial number" formControlName="serial" maxlength="256" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-12 p-0 enrol-save d-flex justify-content-center under-card">
+                                <button mat-raised-button class="btn btn-primary md-enroll ml-2 primary">
+                                    <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span
+                                        i18n="@@register.asset.scanQrCode">Scan QR code</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -351,4 +351,17 @@
   }
 mat-panel-title.mat-expansion-panel-header-title {
     color: #000 !important;
+    color: var(--gray-800, #1D2939);
+text-align: center;
+
+/* Text lg/Semibold */
+font-family: Inter;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 28px; /* 155.556% */
+}
+::ng-deep .popupBtn {
+  color: var(--primary-700, #6941C6) !important;
+  text-align: left !important;
 }

@@ -29,31 +29,31 @@
                         </div>
                         <div class="enrol-save text-center">
                             <button mat-raised-button class="btn btn-primary md-enroll edit-a" (click)="toggleEdit()"> <img
-                                    src="assets/img/mapIcon.png" alt=""> {{editMapOn ? 'Select' : 'Save'}} on map</button>
+                                    src="assets/img/mapIcon.png" alt=""> {{editMapOn ? 'Save' : 'Select'}} on map</button>
                         </div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>
             </div>
-            <div class="mb-2"><mat-accordion>
+            <div class="mb-2 parent-this-span"><mat-accordion>
                 <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Solar panels ({{(solarPanels?.length)}})
+                            Solar panels <span>({{(solarPanels?.length)}})</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <ul>
                           <li *ngFor="let item of solarPanels">
                             <mat-checkbox [(ngModel)]="item.complete" [ngModelOptions]="{standalone: true}"
                                           (ngModelChange)="updateAllComplete()">
-                              {{item.model}}
+                              <a href="javascript:void(0)" (click)="viewSolarDetail(item)">{{item.model}}</a>
                             </mat-checkbox>
                           </li>
                       </ul>
                     <!-- <mat-selection-list togglePosition="before" >
                           <mat-list-option>{{item?.model}}</mat-list-option>
                       </mat-selection-list> -->
-                  <a href="javascript:void(0)" class="edit-a" (click)="openPopup()">+ Add solar panel</a>
+                  <a href="javascript:void(0)" class="edit-a popupBtn" (click)="openPopup()">+ Add solar panel</a>
                 </mat-expansion-panel>
             </mat-accordion>
             </div>

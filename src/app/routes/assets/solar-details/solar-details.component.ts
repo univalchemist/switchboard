@@ -31,7 +31,7 @@ export class SolarDetailsComponent implements OnInit {
   step = 0;
   pictures: any[]=[];
   selectedImage: string;
-  solarPanels: any[] = [];
+  solarPanels: any[]=[];
 
   constructor(
     private fb: FormBuilder,
@@ -40,23 +40,25 @@ export class SolarDetailsComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.solarDetailsForm.patchValue({
-      solarPeakPower: this.solarDetails?.assetSpec.peakPower,
-    location: this.solarDetails?.assetSpec.location,
-    strDescription:this.solarDetails?.structure.description,
-    strCount:this.solarDetails?.structure.count,
-    invType:this.solarDetails?.assetSpec.inverter.model,
-    invSerial:this.solarDetails?.assetSpec.inverter.sn,
-    cabeDescription:this.solarDetails.cabling.description,
-    cabeLength:this.solarDetails.cabling.length,
-    acDescription:this.solarDetails?.cabinetAc.description,
-    acCount:this.solarDetails?.cabinetAc.count,
-    dcDescription:this.solarDetails?.cabinetDc.description,
-    dcCount:this.solarDetails?.cabinetDc.count,
-    })
-    this.pictures = this.solarDetails?.pictures;
-    this.solarPanels = this.solarDetails?.panels.map(i=>{i.complete = true; return i;});
-    console.log(this.solarPanels,'efjhefgehmfefgg');
+    if(this.solarDetails){
+      this.solarDetailsForm.patchValue({
+        solarPeakPower: this.solarDetails?.assetSpec.peakPower,
+      location: this.solarDetails?.assetSpec.location,
+      strDescription:this.solarDetails?.structure.description,
+      strCount:this.solarDetails?.structure.count,
+      invType:this.solarDetails?.assetSpec.inverter.model,
+      invSerial:this.solarDetails?.assetSpec.inverter.sn,
+      cabeDescription:this.solarDetails.cabling.description,
+      cabeLength:this.solarDetails.cabling.length,
+      acDescription:this.solarDetails?.cabinetAc.description,
+      acCount:this.solarDetails?.cabinetAc.count,
+      dcDescription:this.solarDetails?.cabinetDc.description,
+      dcCount:this.solarDetails?.cabinetDc.count,
+      })
+      this.pictures = this.solarDetails?.pictures;
+      this.solarPanels = this.solarDetails?.panels.map(i=>{i.complete = true; return i;});
+      console.log(this.solarPanels,'efjhefgehmfefgg');
+    }
     
     
   }
@@ -91,13 +93,22 @@ export class SolarDetailsComponent implements OnInit {
     this.step = index;
   }
 
-  openPopup(){
-    this._bottomSheet.open(PopupSolarComponent,{
-      panelClass: 'custom-width'
+  openPopup(d?:any){
+    const bottomSheetRef = this._bottomSheet.open(PopupSolarComponent,{
+      panelClass: 'custom-width',
+      data:d
     })
+    bottomSheetRef.afterDismissed().subscribe((dataFromChild) => {
+      if(dataFromChild){
+        dataFromChild.complete = false;
+        this.solarPanels?.push(dataFromChild);
+      }
+    });
   }
   updateAllComplete(){
 
   }
-
+  viewSolarDetail(data){
+    this.openPopup(data)
+  }
 }

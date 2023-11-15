@@ -90,7 +90,13 @@ p.PodID-1 {
   background: var(--base-white, #FFF);
   margin: 0 0 15px 0;
 }
-
+::ng-deep button span img.qr-code {
+  width: 20px !important;
+  margin: 0 6px;
+}
+::ng-deep .md-enroll{
+  font-family: Inter !important;
+}
 p.wire-pod {
   color: var(--gray-800, #1D2939);
   text-align: center;

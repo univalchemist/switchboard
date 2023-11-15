@@ -63,7 +63,7 @@ export class RegisterAssetComponent implements OnInit {
 
   openDetails(panel:string) {
     // panel : 'solar powerplant' | 'energymeter'
-    if(this.showDetails != panel && this.solarDetails) {
+    if(this.showDetails != panel) {
       this.showDetails = panel;
     }
   }

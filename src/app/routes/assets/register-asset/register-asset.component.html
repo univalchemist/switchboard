@@ -12,9 +12,12 @@
               <!-- <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr" appQrCodeScanner (scannedValue)="handleScannedValue($event.data)">
                 <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
               </button> -->
-              <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr"  (click)="handleScannedValue('ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm')">
-                <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
-              </button>
+              <div class="text-center my-2">
+                <!-- only-scan-qr -->
+                <button mat-raised-button class="btn btn-primary md-enroll"  (click)="handleScannedValue('ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm')">
+                  <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
+                </button>
+              </div>
             </div>
           </div>
           <form role="form" [formGroup]="assetForm">
@@ -111,7 +114,7 @@
                     <p class="wire-pod">Energymeter</p>
                     <div class="config">
                       <button class="Configure-bt comp">Completed</button>
-                      <img src="assets/img/arrow-right.png" class="arrow-right" alt="" (click)="openDetails('energymeter')">
+                      <img  (click)="openDetails('energymeter')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
                     </div>
                   </div>
                 </div>
