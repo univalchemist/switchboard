@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./energymeter-details.component.scss']
 })
 export class EnergymeterDetailsComponent {
+  @Input() energyMeterDetails:any; 
+
   public energyMeterForm = this.fb.group({
     type:'',
     serial:'',
@@ -19,8 +21,12 @@ export class EnergymeterDetailsComponent {
   }
 
   ngOnInit(): void {
-   
-    
+   if(this.energyMeterDetails){
+    this.energyMeterForm.patchValue({
+      type:this.energyMeterDetails?.assetSpec.model,
+    serial:this.energyMeterDetails?.assetSpec.sn,
+    })
+   }
   }
 
   close(){

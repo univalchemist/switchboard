@@ -101,7 +101,9 @@ export class SolarDetailsComponent implements OnInit {
     bottomSheetRef.afterDismissed().subscribe((dataFromChild) => {
       if(dataFromChild){
         dataFromChild.complete = false;
-        this.solarPanels?.push(dataFromChild);
+        this.solarPanels = this.solarPanels?.concat(dataFromChild.items);
+        console.log(this.solarPanels,'qewedwfwefwef');
+        
       }
     });
   }

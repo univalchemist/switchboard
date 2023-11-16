@@ -50,6 +50,9 @@ export class RegisterAssetComponent implements OnInit {
   locationMarker:any;
   showDetails:string = '';
   solarDetails:any;
+  energyMeterDetails: any;
+  wirelessDetails: any;
+  ShoowCompleteStatus: boolean = true;
   constructor(
     private fb: FormBuilder,
     private loadingService: LoadingService,
@@ -105,6 +108,11 @@ export class RegisterAssetComponent implements OnInit {
     const energyForm = res.assetTree.find((item) => item.assetType === 'energymeter');
     console.log(solarForm?.assetType);
     this.solarDetails = solarForm; 
+    this.energyMeterDetails = energyForm;
+    this.wirelessDetails = wirelessForm;
+    if(this.wirelessDetails){
+      this.ShoowCompleteStatus = false;
+    }
     
     if(solarForm?.assetType){
       this.pictures = solarForm?.pictures
@@ -153,6 +161,10 @@ export class RegisterAssetComponent implements OnInit {
     this.loadingService.show();
     await this.assetRegisterService.registerAsset();
     this.loadingService.hide();
+  }
+
+  showErrorWireless(d){
+    this.ShoowCompleteStatus = d
   }
 
 }

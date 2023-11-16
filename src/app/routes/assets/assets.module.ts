@@ -39,6 +39,7 @@ import { PopupSolarComponent } from './popup-solar/popup-solar.component';
 import {
   MatBottomSheetModule,
 } from '@angular/material/bottom-sheet';
+import { WirelessDetailComponent } from './wireless-detail/wireless-detail.component';
 
 const routes: Routes = [
   { path: '', component: AssetsComponent },
@@ -67,6 +68,7 @@ const routes: Routes = [
     SolarDetailsComponent,
     EnergymeterDetailsComponent,
     PopupSolarComponent,
+    WirelessDetailComponent,
   ],
   imports: [
     CommonModule,

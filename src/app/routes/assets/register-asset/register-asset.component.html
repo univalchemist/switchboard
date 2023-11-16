@@ -27,8 +27,8 @@
                   <div class="wireless-port">
                     <p class="wire-pod">Wireless Pods</p>
                     <div class="config">
-                      <button class="Configure-bt">Configure</button>
-                      <img src="assets/img/arrow-right.png" class="arrow-right" alt="">
+                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShoowCompleteStatus == false">{{ShoowCompleteStatus == true ?'Config' : 'complete'}}</button>
+                      <img (click)="openDetails('Wireless Pods')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
                     </div>
                   </div>
                   <div class="col-lg-12 p-0">
@@ -152,7 +152,20 @@
           </div>
           
         </div>
-        <app-energymeter-details></app-energymeter-details>
+        <app-energymeter-details [energyMeterDetails]="energyMeterDetails"></app-energymeter-details>
+      </div>
+      <!-- EnergyMeter -->
+      <div class="form-full" *ngIf="showDetails == 'Wireless Pods'">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="back-div d-flex justify-content-between">
+                <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
+                <button class="Configure-bt sm-bt" [class.iscomp] = "ShoowCompleteStatus == false">{{ShoowCompleteStatus == true ?'Config' : 'complete'}}</button>
+            </div>
+          </div>
+          
+        </div>
+        <app-wireless-detail [wirelessDetails]="wirelessDetails" (showErrorWireless)="showErrorWireless($event)"></app-wireless-detail>
       </div>
     </div>
   </div>

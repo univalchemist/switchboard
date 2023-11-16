@@ -1,5 +1,5 @@
 import { Component,EventEmitter,Inject,OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
@@ -8,13 +8,8 @@ import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet } from '@angular/material/bottom-
   styleUrls: ['./popup-solar.component.scss']
 })
 export class PopupSolarComponent implements OnInit {
-  public popupForm = this.fb.group({
-    type:'',
-    serial:'',
-    orientation:'',
-    azimuth:'',
-    inclination:'',
-  });
+  popupForm: any;
+  items: FormArray;
 
   constructor(private fb: FormBuilder,
     private _bottomSheet: MatBottomSheet,
@@ -24,10 +19,16 @@ export class PopupSolarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.popupForm = new FormGroup({
+      items: new FormArray([])
+    });
+      this.items = this.popupForm.get('items') as FormArray;
+      this.items.push(this.createItem());
+    
     if(this.data){
-      this.popupForm.patchValue({
-       type:this.data.model,
-       serial:this.data.sn,
+      this.items.controls[0].patchValue({
+        model:this.data.model,
+       sn:this.data.sn,
        orientation:this.data.orientation,
        azimuth:this.data.azimuth,
        inclination:this.data.inclination,
@@ -36,12 +37,28 @@ export class PopupSolarComponent implements OnInit {
     
   }
 
+  
+
   close(){
     this._bottomSheet.dismiss()
   }
   save(){
     this._bottomSheet.dismiss(this.popupForm.value)
 
+  }
+
+  createItem(): FormGroup {
+    return this.fb.group({
+      model: '',
+      sn: '',
+      orientation: '',
+      azimuth: '',
+      inclination: '',
+    });
+  }
+  addItem(): void {
+    this.items = this.popupForm.get('items') as FormArray;
+    this.items.push(this.createItem());
   }
 
 }

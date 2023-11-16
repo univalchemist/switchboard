@@ -344,8 +344,19 @@
       }
     }
   }
-
+  ::ng-deep button span img.qr-code {
+    width: 20px !important;
+    background: #fff;
+    margin: 0 6px;
+}
   .sm-bt {
     height: 20px;
     padding: 0 6px;
+  }
+  .under-card {
+    padding: 24px 16px 24px 20px !important;
+    border-radius: 12px;
+    border: 1px solid var(--gray-100, #F2F4F7);
+    background: var(--base-white, #FFF);
+    margin: 0 0 15px 0;
   }
