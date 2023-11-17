@@ -42,14 +42,14 @@
                             Solar panels <span>({{(solarPanels?.length)}})</span>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <ul>
-                          <li *ngFor="let item of solarPanels">
-                            <mat-checkbox [(ngModel)]="item.complete" [ngModelOptions]="{standalone: true}"
-                                          (ngModelChange)="updateAllComplete()">
-                              <a href="javascript:void(0)" (click)="viewSolarDetail(item)">{{item.model}}</a>
-                            </mat-checkbox>
-                          </li>
-                      </ul>
+                            <div>
+                                <mat-checkbox [(ngModel)]="selectAll" [color]="'primary'" (change)="toggleSelectAll()" [ngModelOptions]="{standalone: true}">Select All ({{solarPanels?.length}})</mat-checkbox>
+                              </div>
+                              <mat-list>
+                                <mat-list-item *ngFor="let item of solarPanels; let i=index">
+                                  <mat-checkbox [(ngModel)]="item.complete" [color]="'primary'" (change)="selectOnce(i,$event)" [ngModelOptions]="{standalone: true}"><a class="text-dark" href="javascript:void(0)" (click)="viewSolarDetail(item)">{{item.model}}</a></mat-checkbox>
+                                </mat-list-item>
+                              </mat-list>
                   <a href="javascript:void(0)" class="edit-a popupBtn" (click)="openPopup()">+ Add solar panel</a>
                 </mat-expansion-panel>
             </mat-accordion>

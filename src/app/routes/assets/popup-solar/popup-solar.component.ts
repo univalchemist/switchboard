@@ -54,6 +54,7 @@ export class PopupSolarComponent implements OnInit {
       orientation: '',
       azimuth: '',
       inclination: '',
+      complete:true,
     });
   }
   addItem(): void {

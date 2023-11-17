@@ -27,7 +27,7 @@
                   <div class="wireless-port">
                     <p class="wire-pod">Wireless Pods</p>
                     <div class="config">
-                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShoowCompleteStatus == false">{{ShoowCompleteStatus == true ?'Config' : 'complete'}}</button>
+                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteWireless == false">{{ShowCompleteWireless == true ?'Configure' : 'complete'}}</button>
                       <img (click)="openDetails('Wireless Pods')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
                     </div>
                   </div>
@@ -64,7 +64,7 @@
                   <div class="wireless-port">
                     <p class="wire-pod">Solar powerplant</p>
                     <div class="config">
-                      <button class="Configure-bt comp">Completed</button>
+                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteSolarPanel == false">{{ShowCompleteSolarPanel == true ?'Configure' : 'complete'}}</button>
                       <img (click)="openDetails('solar powerplant')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
                     </div>
                   </div>
@@ -113,7 +113,7 @@
                   <div class="wireless-port">
                     <p class="wire-pod">Energymeter</p>
                     <div class="config">
-                      <button class="Configure-bt comp">Completed</button>
+                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteEnergy == false">{{ShowCompleteEnergy == true ?'Configure' : 'complete'}}</button>
                       <img  (click)="openDetails('energymeter')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
                     </div>
                   </div>
@@ -134,11 +134,11 @@
           <div class="col-lg-12">
             <div class="back-div d-flex justify-content-between">
                 <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
-                <button class="Configure-bt comp sm-bt">Completed</button>
+                <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteSolarPanel == false">{{ShowCompleteSolarPanel == true ?'Configure' : 'complete'}}</button>
             </div>
           </div>
         </div>
-        <app-solar-details [solarDetails]="solarDetails"></app-solar-details>
+        <app-solar-details [solarDetails]="solarDetails" (showSolarPanel)="showSolarPanel($event)"></app-solar-details>
       </div>
 
       <!-- EnergyMeter -->
@@ -147,20 +147,20 @@
           <div class="col-lg-12">
             <div class="back-div d-flex justify-content-between">
                 <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
-                <button class="Configure-bt comp sm-bt">Config</button>
+                <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteEnergy == false">{{ShowCompleteEnergy == true ?'Configure' : 'complete'}}</button>
             </div>
           </div>
           
         </div>
-        <app-energymeter-details [energyMeterDetails]="energyMeterDetails"></app-energymeter-details>
+        <app-energymeter-details [energyMeterDetails]="energyMeterDetails" (showErrorEnergyMeter)="showErrorEnergyMeter($event)"></app-energymeter-details>
       </div>
-      <!-- EnergyMeter -->
+      <!-- Wireless -->
       <div class="form-full" *ngIf="showDetails == 'Wireless Pods'">
         <div class="row">
           <div class="col-lg-12">
             <div class="back-div d-flex justify-content-between">
                 <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
-                <button class="Configure-bt sm-bt" [class.iscomp] = "ShoowCompleteStatus == false">{{ShoowCompleteStatus == true ?'Config' : 'complete'}}</button>
+                <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteWireless == false">{{ShowCompleteWireless == true ?'Configure' : 'complete'}}</button>
             </div>
           </div>
           

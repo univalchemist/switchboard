@@ -50,6 +50,14 @@ mat-checkbox {
   margin: 0 0 10px 0;
   padding: 5px 5px;
 }
+
+mat-list-item.mat-mdc-list-item.mdc-list-item.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
+  border-radius: 8px;
+  border: 1px solid var(--gray-200, #EAECF0);
+  margin: 0 0 10px 0;
+  padding: 5px 5px;
+}
+
 .new-design .mat-expansion-panel-body ul li label.mdc-label {
   margin: 0;
   padding: 0;

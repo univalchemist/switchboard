@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupSolarComponent } from '../popup-solar/popup-solar.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -32,11 +33,23 @@ export class SolarDetailsComponent implements OnInit {
   pictures: any[]=[];
   selectedImage: string;
   solarPanels: any[]=[];
+  selectAll = true;
+  @Output() showSolarPanel: EventEmitter<any> = new EventEmitter();
+  public isButtonDisabled: boolean;
+  public formValueChangeSubscription :Subscription;
+  notSelectedPannel: boolean=false;
+
 
   constructor(
     private fb: FormBuilder,
     private _bottomSheet: MatBottomSheet
   ) {
+    this.solarDetailsForm.valueChanges.subscribe(res=>{
+      this.formValueChangeSubscription = this.solarDetailsForm.valueChanges.subscribe(() => {
+        this.isButtonDisabled = Object.keys(this.solarDetailsForm.controls).some(formKey => !this.solarDetailsForm.controls[formKey].value);
+        this.showSolarPanel.emit(this.isButtonDisabled);
+      })
+    })
   }
   
   ngOnInit(): void {
@@ -57,7 +70,6 @@ export class SolarDetailsComponent implements OnInit {
       })
       this.pictures = this.solarDetails?.pictures;
       this.solarPanels = this.solarDetails?.panels.map(i=>{i.complete = true; return i;});
-      console.log(this.solarPanels,'efjhefgehmfefgg');
     }
     
     
@@ -102,8 +114,6 @@ export class SolarDetailsComponent implements OnInit {
       if(dataFromChild){
         dataFromChild.complete = false;
         this.solarPanels = this.solarPanels?.concat(dataFromChild.items);
-        console.log(this.solarPanels,'qewedwfwefwef');
-        
       }
     });
   }
@@ -113,4 +123,25 @@ export class SolarDetailsComponent implements OnInit {
   viewSolarDetail(data){
     this.openPopup(data)
   }
+
+  toggleSelectAll() {
+    this.notSelectedPannel = false;
+    this.solarPanels = this.solarPanels.map(item =>{item.complete = this.selectAll;return item});
+    this.solarDetails?.panels.forEach(i=>{ if(i.complete == true){ this.notSelectedPannel = true}})
+    if(this.notSelectedPannel && !this.isButtonDisabled)
+    this.showSolarPanel.emit(false);
+    else
+    this.showSolarPanel.emit(true);
+
+  }
+  selectOnce(idx,checked){
+    this.solarPanels[idx].complete = checked.checked;
+    this.notSelectedPannel = false;
+    this.solarDetails?.panels.forEach(i=>{ if(i.complete == true){ this.notSelectedPannel = true}})
+    if(this.notSelectedPannel && !this.isButtonDisabled)
+    this.showSolarPanel.emit(false);
+    else
+    this.showSolarPanel.emit(true);
+  }
+
 }

@@ -51,7 +51,4 @@ export class WirelessDetailComponent {
   close(){
   }
 
-  ngOnDestroy(): void{
-    this.formValueChangeSubscription.unsubscribe();
-}
 }

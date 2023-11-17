@@ -52,7 +52,10 @@ export class RegisterAssetComponent implements OnInit {
   solarDetails:any;
   energyMeterDetails: any;
   wirelessDetails: any;
-  ShoowCompleteStatus: boolean = true;
+  ShowCompleteWireless: boolean = true;
+  ShowCompleteEnergy: boolean = true;
+  ShowCompleteSolarPanel: boolean = true;
+
   constructor(
     private fb: FormBuilder,
     private loadingService: LoadingService,
@@ -68,6 +71,12 @@ export class RegisterAssetComponent implements OnInit {
     // panel : 'solar powerplant' | 'energymeter'
     if(this.showDetails != panel) {
       this.showDetails = panel;
+      if(this.showDetails == 'solar powerplant')
+      this.ShowCompleteSolarPanel = false
+      else if(this.showDetails == 'energymeter')
+        this.ShowCompleteEnergy = false
+      if(this.showDetails == 'Wireless Pods')
+       this.ShowCompleteWireless = false
     }
   }
 
@@ -102,21 +111,23 @@ export class RegisterAssetComponent implements OnInit {
     // ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm
     const res: any = await this.assetRegisterService.getAssetDetail(data);
     this.loadingService.hide();
-    console.log('getAssetDetail: ', res);
     const wirelessForm = res.assetTree.find((item) => item.assetType === 'wireless pod');
     const solarForm = res.assetTree.find((item) => item.assetType === 'solar powerplant');
     const energyForm = res.assetTree.find((item) => item.assetType === 'energymeter');
-    console.log(solarForm?.assetType);
     this.solarDetails = solarForm; 
     this.energyMeterDetails = energyForm;
     this.wirelessDetails = wirelessForm;
     if(this.wirelessDetails){
-      this.ShoowCompleteStatus = false;
+      this.ShowCompleteWireless = false;
     }
-    
+    if(this.energyMeterDetails){
+      this.ShowCompleteEnergy = false;
+    }
+    if(this.solarDetails){
+      this.ShowCompleteSolarPanel = false;
+    }
     if(solarForm?.assetType){
       this.pictures = solarForm?.pictures
-
     }
     this.assetForm.patchValue({
       wirelessType: wirelessForm.assetSpec.model,
@@ -164,7 +175,13 @@ export class RegisterAssetComponent implements OnInit {
   }
 
   showErrorWireless(d){
-    this.ShoowCompleteStatus = d
+    this.ShowCompleteWireless = d
+  }
+  showErrorEnergyMeter(d){
+    this.ShowCompleteEnergy = d
+  }
+  showSolarPanel(d){
+    this.ShowCompleteSolarPanel = d
   }
 
 }
