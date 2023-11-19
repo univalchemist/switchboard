@@ -9,42 +9,43 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class WirelessDetailComponent {
   @Input() wirelessDetails:any; 
-  @Output() showErrorWireless: EventEmitter<any> = new EventEmitter();
+  @Output() sendBackData: EventEmitter<any> = new EventEmitter();
 
 
   public isButtonDisabled: boolean;
-  public formValueChangeSubscription :Subscription;
 
   public wireFrameForm = this.fb.group({
-    type:'',
-    serial:'',
-    publicKey:''
+    model:'',
+    sn:'',
+    pubKey:''
   });
 
 
   constructor(private fb: FormBuilder,
     ) {
       this.wireFrameForm.valueChanges.subscribe(res=>{
-        this.formValueChangeSubscription = this.wireFrameForm.valueChanges.subscribe(() => {
-          this.isButtonDisabled = Object.keys(this.wireFrameForm.controls).some(formKey => !this.wireFrameForm.controls[formKey].value);
-          this.showErrorWireless.emit(this.isButtonDisabled)
-        })
-      })
+          Object.keys(res).forEach(key => {
+            this.wirelessDetails.assetSpec[key] = res[key];
+          })
+          this.sendDataBack();
+      });
   }
 
   ngOnInit(): void {
     if(this.wirelessDetails){
       this.wireFrameForm.patchValue({
-        type:this.wirelessDetails?.assetSpec.model,
-        publicKey:this.wirelessDetails?.assetSpec.pubKey,
-        serial:this.wirelessDetails?.assetSpec.sn,
+        model:this.wirelessDetails?.assetSpec.model,
+        pubKey:this.wirelessDetails?.assetSpec.pubKey,
+        sn:this.wirelessDetails?.assetSpec.sn,
       })
-     }
-     if(this.wirelessDetails?.assetSpec.model && this.wirelessDetails?.assetSpec.pubKey && this.wirelessDetails?.assetSpec.sn){
-      this.isButtonDisabled = false;
-      this.showErrorWireless.emit(this.isButtonDisabled)
-     }
-    
+    } else {
+      this.wirelessDetails = { assetSpec: {}}
+    }    
+    this.sendDataBack();
+  }
+
+  sendDataBack() {
+    this.sendBackData.emit(this.wirelessDetails);
   }
 
 

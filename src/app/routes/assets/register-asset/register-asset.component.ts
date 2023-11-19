@@ -61,6 +61,9 @@ export class RegisterAssetComponent implements OnInit {
     private loadingService: LoadingService,
     private assetRegisterService: AssetsRegisterService,
   ) {
+    this.assetForm.valueChanges.subscribe(res => {
+      this.formChanges(res);
+    })
   }
 
   ngOnInit(): void {
@@ -174,14 +177,47 @@ export class RegisterAssetComponent implements OnInit {
     this.loadingService.hide();
   }
 
-  showErrorWireless(d){
-    this.ShowCompleteWireless = d
-  }
   showErrorEnergyMeter(d){
     this.ShowCompleteEnergy = d
   }
   showSolarPanel(d){
     this.ShowCompleteSolarPanel = d
+  }
+
+  mapBackWireless(dataValues) {
+    if(!this.wirelessDetails) {
+      this.wirelessDetails = {assetSpec : {}}
+    }
+    this.wirelessDetails.assetSpec.model = dataValues?.assetSpec?.model;
+    this.wirelessDetails.assetSpec.sn = dataValues?.assetSpec?.sn;
+    this.wirelessDetails.assetSpec.pubKey = dataValues?.assetSpec?.pubKey;
+    this.assetForm.patchValue({
+      wirelessType: this.wirelessDetails.assetSpec.model,
+      wirelessSn: this.wirelessDetails.assetSpec.sn,
+      wirelessPublicKey: this.wirelessDetails.assetSpec.pubKey,
+    })
+    this.checkWirelessEmpty();
+  }
+
+  checkWirelessEmpty() {
+    this.ShowCompleteWireless = (!this.assetForm.value.wirelessSn || !this.assetForm.value.wirelessPublicKey || !this.assetForm.value.wirelessType)
+  }
+
+  formChanges(res) {
+    if(res) {
+      if(!this.wirelessDetails) { this.wirelessDetails = { assetSpec:{} }};
+      if(!this.energyMeterDetails) { this.energyMeterDetails = { assetSpec:{} }};
+      if(!this.solarDetails) { this.solarDetails = { assetSpec:{} }};
+      
+      // wireless
+      this.wirelessDetails.assetSpec['model'] = res.wirelessType;
+      this.wirelessDetails.assetSpec['sn'] = res.wirelessSn;
+      this.wirelessDetails.assetSpec['pubKey'] = res.wirelessPublicKey;
+      this.checkWirelessEmpty();
+      
+      this.solarDetails.assetSpec.peakPower = res.solarPeakPower,
+      this.solarDetails.assetSpec.inverter.model = res.solarInverterType;
+    }
   }
 
 }
