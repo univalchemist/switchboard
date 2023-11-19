@@ -36,6 +36,7 @@ export class MapboxElmComponent implements OnInit{
       container: 'map1',
       style: this.style,
       zoom: 18,
+      attributionControl: false,
       center: [this.currentLocation.longitude, this.currentLocation.latitude],
     });
 
