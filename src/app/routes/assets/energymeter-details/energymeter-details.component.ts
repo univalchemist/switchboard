@@ -9,9 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class EnergymeterDetailsComponent {
   @Input() energyMeterDetails:any; 
-  @Output() showErrorEnergyMeter: EventEmitter<any> = new EventEmitter();
-  public isBtnForEnergyMeter: boolean;
-  public formValueChangeSubscription :Subscription;
+  @Output() sendBackData: EventEmitter<any> = new EventEmitter();
 
 
   public energyMeterForm = this.fb.group({
@@ -23,26 +21,32 @@ export class EnergymeterDetailsComponent {
   constructor(private fb: FormBuilder,
     ) {
       this.energyMeterForm.valueChanges.subscribe(res=>{
-        this.formValueChangeSubscription = this.energyMeterForm.valueChanges.subscribe(() => {
-          this.isBtnForEnergyMeter = Object.keys(this.energyMeterForm.controls).some(formKey => !this.energyMeterForm.controls[formKey].value);
-          this.showErrorEnergyMeter.emit(this.isBtnForEnergyMeter)
+        Object.keys(res).forEach(key => {
+          this.energyMeterDetails.assetSpec[key] = res[key];
         })
-      })
+        this.sendDataBack();
+    });
+
 
   }
 
   ngOnInit(): void {
-   if(this.energyMeterDetails){
-    this.energyMeterForm.patchValue({
-      model:this.energyMeterDetails?.assetSpec.model,
-      sn:this.energyMeterDetails?.assetSpec.sn,
-    })
-    this.isBtnForEnergyMeter = Object.keys(this.energyMeterForm.controls).some(formKey => !this.energyMeterForm.controls[formKey].value);
-    this.showErrorEnergyMeter.emit(this.isBtnForEnergyMeter)
-   }
+    if(this.energyMeterDetails){
+      this.energyMeterForm.patchValue({
+        model:this.energyMeterDetails?.assetSpec.model,
+        sn:this.energyMeterDetails?.assetSpec.sn,
+      })
+    } else {
+      this.energyMeterDetails = { assetSpec: {}}
+    }    
+    this.sendDataBack();
   }
 
   close(){
+  }
+
+  sendDataBack() {
+    this.sendBackData.emit(this.energyMeterDetails);
   }
 
 }

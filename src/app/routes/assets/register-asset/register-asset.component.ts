@@ -132,6 +132,7 @@ export class RegisterAssetComponent implements OnInit {
     if(solarForm?.assetType){
       this.pictures = solarForm?.pictures
     }
+    this.solarDetails.SelectedPnael = []
     this.assetForm.patchValue({
       wirelessType: wirelessForm.assetSpec.model,
       wirelessSn: wirelessForm.assetSpec.sn,
@@ -162,27 +163,26 @@ export class RegisterAssetComponent implements OnInit {
     reader.onload = (event) => {
         this.selectedImage = event.target.result as string;
         this.pictures.push(this.selectedImage)
+        this.solarDetails.pictures.push(this.selectedImage)
       };
   }
 
   removeImage(idx){
     if(idx >= 0 && idx < this.pictures.length){
-      this.pictures.splice(idx,1)
+      this.pictures.splice(idx,1);
+      this.checkSolarEmptyForCurrent()
     }
   }
 
   async onSave() {
     this.loadingService.show();
-    await this.assetRegisterService.registerAsset();
+    console.log(this.assetRegisterService.registerAsset());
+    
+    // await this.assetRegisterService.registerAsset();
     this.loadingService.hide();
   }
 
-  showErrorEnergyMeter(d){
-    this.ShowCompleteEnergy = d
-  }
-  showSolarPanel(d){
-    this.ShowCompleteSolarPanel = d
-  }
+
 
   mapBackWireless(dataValues) {
     if(!this.wirelessDetails) {
@@ -198,10 +198,63 @@ export class RegisterAssetComponent implements OnInit {
     })
     this.checkWirelessEmpty();
   }
+  mapBackEnergyMeter(dataValues){
+    if(!this.wirelessDetails) {
+      this.wirelessDetails = {assetSpec : {}}
+    }
+    this.energyMeterDetails.assetSpec.model = dataValues?.assetSpec?.model;
+    this.energyMeterDetails.assetSpec.sn = dataValues?.assetSpec?.sn;
+    this.energyMeterDetails.assetSpec.pubKey = dataValues?.assetSpec?.pubKey;
+    this.assetForm.patchValue({
+      energyType: this.energyMeterDetails.assetSpec.model,
+      energySn: this.energyMeterDetails.assetSpec.sn,
 
+    })
+    this.checkEnergyEmpty()
+  }
+  mapBackSolarPanel(dataValues){
+    if(!this.wirelessDetails) {
+      this.wirelessDetails = {assetSpec : {}}
+    }
+    console.log(dataValues,'fjeyfgj');
+    
+    this.assetForm.patchValue({
+      solarPeakPower: dataValues.assetSpec.peakPower,
+      solarLocation: dataValues.assetSpec.location,
+      solarInverterType: dataValues.assetSpec.inverter.model,
+      solarInverterSn: dataValues.assetSpec.inverter.sn,
+      solarPanels: dataValues.panels,
+      solarStructureDescription: dataValues.structure.description,
+      solarStructureCount: dataValues.structure.count,
+      solarCablingDescription: dataValues.cabling.description,
+      solarCablingLength: dataValues.cabling.length,
+      solarCabinetAcDescription: dataValues.cabinetAc.description,
+      solarCabinetAcCount: dataValues.cabinetAc.count,
+      solarCabinetDcDescription: dataValues.cabinetDc.description,
+      solarCabinetDcCount: dataValues.cabinetDc.count,
+    });
+    this.checkSolarEmpty()
+  }
+
+  
   checkWirelessEmpty() {
     this.ShowCompleteWireless = (!this.assetForm.value.wirelessSn || !this.assetForm.value.wirelessPublicKey || !this.assetForm.value.wirelessType)
   }
+  checkEnergyEmpty() {
+    this.ShowCompleteEnergy = (!this.energyMeterDetails.assetSpec.model || !this.energyMeterDetails.assetSpec.sn);
+    
+  }
+  checkSolarEmpty() {
+    console.log(this.solarDetails.SelectedPnael);
+    
+    this.ShowCompleteSolarPanel = (!this.assetForm.value.solarPeakPower || !this.assetForm.value.solarLocation || !this.assetForm.value.solarInverterType || !this.assetForm.value.solarInverterSn || !this.assetForm.value.solarStructureDescription || !this.assetForm.value.solarStructureCount || !this.assetForm.value.solarCablingDescription || !this.assetForm.value.solarCablingLength || !this.assetForm.value.solarCabinetAcDescription || !this.assetForm.value.solarCabinetAcCount || this.assetForm.value.solarPictures.length <= 0 || !this.solarDetails.SelectedPnael.length);
+    
+  }
+  checkSolarEmptyForCurrent() {
+    this.ShowCompleteSolarPanel = (!this.assetForm.value.solarPeakPower || !this.assetForm.value.solarInverterType || this.solarDetails.pictures.length <= 0);
+    
+  }
+  
 
   formChanges(res) {
     if(res) {
@@ -215,8 +268,10 @@ export class RegisterAssetComponent implements OnInit {
       this.wirelessDetails.assetSpec['pubKey'] = res.wirelessPublicKey;
       this.checkWirelessEmpty();
       
-      this.solarDetails.assetSpec.peakPower = res.solarPeakPower,
+      this.solarDetails.assetSpec['peakPower'] = res.solarPeakPower,
       this.solarDetails.assetSpec.inverter.model = res.solarInverterType;
+      this.checkSolarEmptyForCurrent();
+      this.checkEnergyEmpty()
     }
   }
 

@@ -138,7 +138,7 @@
             </div>
           </div>
         </div>
-        <app-solar-details [solarDetails]="solarDetails" (showSolarPanel)="showSolarPanel($event)"></app-solar-details>
+        <app-solar-details [solarDetails]="solarDetails" (sendBackData)="mapBackSolarPanel($event)"></app-solar-details>
       </div>
 
       <!-- EnergyMeter -->
@@ -152,7 +152,7 @@
           </div>
           
         </div>
-        <app-energymeter-details [energyMeterDetails]="energyMeterDetails" (showErrorEnergyMeter)="showErrorEnergyMeter($event)"></app-energymeter-details>
+        <app-energymeter-details [energyMeterDetails]="energyMeterDetails" (sendBackData)="mapBackEnergyMeter($event)"></app-energymeter-details>
       </div>
       <!-- Wireless -->
       <div class="form-full" *ngIf="showDetails == 'Wireless Pods'">

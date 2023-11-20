@@ -12,71 +12,122 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./solar-details.component.scss']
 })
 export class SolarDetailsComponent implements OnInit {
-  @Input() solarDetails:any; 
+  @Input() solarDetails: any;
   public solarDetailsForm = this.fb.group({
     solarPeakPower: '',
     location: '',
-    strDescription:'',
-    strCount:'',
-    invType:'',
-    invSerial:'',
-    cabeDescription:'',
-    cabeLength:'',
-    acDescription:'',
-    acCount:'',
-    dcDescription:'',
-    dcCount:'',
+    strDescription: '',
+    strCount: '',
+    invType: '',
+    invSerial: '',
+    cabeDescription: '',
+    cabeLength: '',
+    acDescription: '',
+    acCount: '',
+    dcDescription: '',
+    dcCount: '',
   });
-  editMapOn:boolean;
-  locationMarker:any;
+  editMapOn: boolean;
+  locationMarker: any;
   step = 0;
-  pictures: any[]=[];
+  pictures: any[] = [];
   selectedImage: string;
-  solarPanels: any[]=[];
+  solarPanelsDetails: any[] = [];
   selectAll = true;
-  @Output() showSolarPanel: EventEmitter<any> = new EventEmitter();
+  @Output() sendBackData: EventEmitter<any> = new EventEmitter();
   public isButtonDisabled: boolean;
-  public formValueChangeSubscription :Subscription;
-  notSelectedPannel: boolean=false;
+  public formValueChangeSubscription: Subscription;
+  notSelectedPannel: boolean = false;
 
 
   constructor(
     private fb: FormBuilder,
     private _bottomSheet: MatBottomSheet
   ) {
-    this.solarDetailsForm.valueChanges.subscribe(res=>{
-      this.formValueChangeSubscription = this.solarDetailsForm.valueChanges.subscribe(() => {
-        this.isButtonDisabled = Object.keys(this.solarDetailsForm.controls).some(formKey => !this.solarDetailsForm.controls[formKey].value);
-        this.showSolarPanel.emit(this.isButtonDisabled);
+    this.solarDetailsForm.valueChanges.subscribe(res => {
+      Object.keys(res).forEach(key => {
+        this.checkKeys(key,res)
+
       })
-    })
-  }
-  
-  ngOnInit(): void {
-    if(this.solarDetails){
-      this.solarDetailsForm.patchValue({
-        solarPeakPower: this.solarDetails?.assetSpec.peakPower,
-      location: this.solarDetails?.assetSpec.location,
-      strDescription:this.solarDetails?.structure.description,
-      strCount:this.solarDetails?.structure.count,
-      invType:this.solarDetails?.assetSpec.inverter.model,
-      invSerial:this.solarDetails?.assetSpec.inverter.sn,
-      cabeDescription:this.solarDetails.cabling.description,
-      cabeLength:this.solarDetails.cabling.length,
-      acDescription:this.solarDetails?.cabinetAc.description,
-      acCount:this.solarDetails?.cabinetAc.count,
-      dcDescription:this.solarDetails?.cabinetDc.description,
-      dcCount:this.solarDetails?.cabinetDc.count,
-      })
-      this.pictures = this.solarDetails?.pictures;
-      this.solarPanels = this.solarDetails?.panels.map(i=>{i.complete = true; return i;});
-    }
-    
-    
+      this.sendDataBack();
+    });
   }
 
-  changeLocation(event:any) {
-    if(event.longitude && event.latitude) {
+
+  checkKeys(key,res) {
+    switch (key) {
+      case 'solarPeakPower':
+   this.solarDetails.assetSpec.peakPower = res['solarPeakPower']
+        break;
+      case 'location':
+           this.solarDetails.assetSpec.location = res['location']
+        break;
+      case 'strDescription':
+           this.solarDetails.structure.description = res['strDescription']
+
+        break;
+      case 'strCount':
+           this.solarDetails.structure.count = res['strCount']
+        break;
+      case 'invType':
+           this.solarDetails.assetSpec.inverter.model = res['invType']
+
+        break;
+      case 'invSerial':
+           this.solarDetails.assetSpec.inverter.sn = res['invSerial']
+
+        break;
+      case 'cabeDescription':
+           this.solarDetails.cabling.description = res['cabeDescription']
+        break;
+      case 'cabeLength':
+           this.solarDetails.cabling.length = res['cabeLength']
+
+        break;
+      case 'acDescription':
+           this.solarDetails.cabinetAc.description = res['acDescription']
+        break;
+      case 'acCount':
+           this.solarDetails.cabinetAc.count = res['acCount']
+
+        break;
+      case 'dcDescription':
+           this.solarDetails.cabinetDc.description = res['dcDescription']
+        break;
+      case 'dcCount':
+           this.solarDetails.cabinetDc.count = res['dcCount']
+        break;
+    }
+  }
+
+  async ngOnInit() {
+    if (this.solarDetails) {
+      this.solarDetailsForm.patchValue({
+        solarPeakPower: this.solarDetails?.assetSpec.peakPower,
+        location: this.solarDetails?.assetSpec.location,
+        strDescription: this.solarDetails?.structure.description,
+        strCount: this.solarDetails?.structure.count,
+        invType: this.solarDetails?.assetSpec.inverter.model,
+        invSerial: this.solarDetails?.assetSpec.inverter.sn,
+        cabeDescription: this.solarDetails.cabling.description,
+        cabeLength: this.solarDetails.cabling.length,
+        acDescription: this.solarDetails?.cabinetAc.description,
+        acCount: this.solarDetails?.cabinetAc.count,
+        dcDescription: this.solarDetails?.cabinetDc.description,
+        dcCount: this.solarDetails?.cabinetDc.count,
+      })
+      this.pictures = this.solarDetails?.pictures;
+       this.solarPanelsDetails = await this.solarDetails?.panels.map(i => { i.complete = true; return i; });
+    } else {
+      this.solarDetails = { assetSpec: {} }
+    }
+    this.sendDataBack();
+
+
+  }
+
+  changeLocation(event: any) {
+    if (event.longitude && event.latitude) {
       this.locationMarker = event;
     }
   }
@@ -90,14 +141,14 @@ export class SolarDetailsComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(chooseFile);
     reader.onload = (event) => {
-        this.selectedImage = event.target.result as string;
-        this.pictures.push(this.selectedImage)
-      };
+      this.selectedImage = event.target.result as string;
+      this.pictures.push(this.selectedImage)
+    };
   }
 
-  removeImage(idx){
-    if(idx >= 0 && idx < this.pictures.length){
-      this.pictures.splice(idx,1)
+  removeImage(idx) {
+    if (idx >= 0 && idx < this.pictures.length) {
+      this.pictures.splice(idx, 1)
     }
   }
 
@@ -105,43 +156,47 @@ export class SolarDetailsComponent implements OnInit {
     this.step = index;
   }
 
-  openPopup(d?:any){
-    const bottomSheetRef = this._bottomSheet.open(PopupSolarComponent,{
+  openPopup(d?: any) {
+    const bottomSheetRef = this._bottomSheet.open(PopupSolarComponent, {
       panelClass: 'custom-width',
-      data:d
+      data: d
     })
     bottomSheetRef.afterDismissed().subscribe((dataFromChild) => {
-      if(dataFromChild){
+      if (dataFromChild) {
         dataFromChild.complete = false;
-        this.solarPanels = this.solarPanels?.concat(dataFromChild.items);
+        this.solarPanelsDetails = this.solarPanelsDetails?.concat(dataFromChild.items);
       }
     });
   }
-  updateAllComplete(){
+  updateAllComplete() {
 
   }
-  viewSolarDetail(data){
+  viewSolarDetail(data) {
     this.openPopup(data)
   }
 
   toggleSelectAll() {
+    this.solarDetails.SelectedPnael=[]
     this.notSelectedPannel = false;
-    this.solarPanels = this.solarPanels.map(item =>{item.complete = this.selectAll;return item});
-    this.solarDetails?.panels.forEach(i=>{ if(i.complete == true){ this.notSelectedPannel = true}})
-    if(this.notSelectedPannel && !this.isButtonDisabled)
-    this.showSolarPanel.emit(false);
-    else
-    this.showSolarPanel.emit(true);
+    this.solarPanelsDetails = this.solarPanelsDetails.map(item => { item.complete = this.selectAll; return item });
+    let result:any[] = this.solarDetails?.panels.map(i => { if (i.complete == true) { return i; } })
+    result.forEach(i=>{if(i){this.solarDetails.SelectedPnael.push(i)}})
+    this.sendDataBack()
+  }
+  selectOnce(idx, checked) {
+    this.solarDetails.SelectedPnael=[]
+    this.solarPanelsDetails[idx].complete = checked.checked;
+    this.notSelectedPannel = false;
+    let result = this.solarDetails?.panels.map(i => { if (i.complete == true) { return i; } })
+    result.forEach(i=>{if(i){this.solarDetails.SelectedPnael.push(i)}})
+    this.sendDataBack()
 
   }
-  selectOnce(idx,checked){
-    this.solarPanels[idx].complete = checked.checked;
-    this.notSelectedPannel = false;
-    this.solarDetails?.panels.forEach(i=>{ if(i.complete == true){ this.notSelectedPannel = true}})
-    if(this.notSelectedPannel && !this.isButtonDisabled)
-    this.showSolarPanel.emit(false);
-    else
-    this.showSolarPanel.emit(true);
+
+  sendDataBack() {
+    console.log(this.solarDetails,'solar details');
+    
+    this.sendBackData.emit(this.solarDetails);
   }
 
 }
