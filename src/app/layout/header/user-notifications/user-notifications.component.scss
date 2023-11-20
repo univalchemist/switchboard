@@ -29,3 +29,18 @@ a:hover {
 .no-notif {
   width: 180px;
 }
+
+
+p {
+  &.pr-2.default-color {
+    font-size: 12px;
+    font-weight: 500!important;
+  }
+}
+.icon-center{
+  display: flex!important;
+  align-items: center!important;
+}
+::ng-deep .mat-mdc-menu-content{
+  padding: 0px 0px !important;
+}

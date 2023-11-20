@@ -1,0 +1,212 @@
+
+<form role="form" [formGroup]="solarDetailsForm">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="mb-2"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="d-flex justify-content-between">
+                            Solar powerplant
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Peak power</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter peak power" formControlName="solarPeakPower" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.publicKey">Location</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="location">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.location" placeholder="Enter Location"
+                                formControlName="location" maxlength="256" />
+                        </mat-form-field>
+                        <div class="map">
+                            <app-mapbox-elm *ngIf="editMapOn" [toShowSearch]="editMapOn" (pickedLocation)="changeLocation($event)"
+                                [allowPickLocation]="editMapOn"></app-mapbox-elm>
+                        </div>
+                        <div class="enrol-save text-center">
+                            <button mat-raised-button class="btn btn-primary md-enroll edit-a" (click)="toggleEdit()"> <img
+                                    src="assets/img/mapIcon.png" alt=""> {{editMapOn ? 'Save' : 'Select'}} on map</button>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+            <div class="mb-2 parent-this-span"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Solar panels <span>({{(solarPanelsDetails?.length)}})</span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                            <div>
+                                <mat-checkbox [(ngModel)]="selectAll" [color]="'primary'" (change)="toggleSelectAll()" [ngModelOptions]="{standalone: true}">Select All ({{solarPanelsDetails?.length}})</mat-checkbox>
+                              </div>
+                              <mat-list>
+                                <mat-list-item *ngFor="let item of solarPanelsDetails; let i=index">
+                                  <mat-checkbox [(ngModel)]="item.complete" [color]="'primary'" (change)="selectOnce(i,$event)" [ngModelOptions]="{standalone: true}"><a class="text-dark" href="javascript:void(0)" (click)="viewSolarDetail(item)">{{item.model}}</a></mat-checkbox>
+                                </mat-list-item>
+                              </mat-list>
+                  <a href="javascript:void(0)" class="edit-a popupBtn" (click)="openPopup()">+ Add solar panel</a>
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+            <div class="mb-2"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Inverter
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Type</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter a Type" formControlName="invType" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Serial</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter serial" formControlName="invSerial" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+            <div class="mb-2"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Structure
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Description</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter a Description" formControlName="strDescription" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Count</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="number"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter Count" formControlName="strCount" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+            <div class="mb-2"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Cabeling
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Description</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter a Description" formControlName="cabeDescription" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Length</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter a length" formControlName="cabeLength" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+            <div class="mb-2"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            AC cabinet
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Description</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter a Description" formControlName="acDescription" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Count</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="number"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter Count" formControlName="acCount" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+            <div class="mb-2"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            DC cabinet
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Description</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="text"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter a Description" formControlName="dcDescription" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 p-0">
+                        <mat-label class="" i18n="@@register.asset.solar.peakPower">Count</mat-label>
+                        <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                            <input matInput autocomplete="off" type="number"
+                                i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
+                                placeholder="Enter Count" formControlName="dcCount" maxlength="256" />
+                        </mat-form-field>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+            <div class="mb-2"><mat-accordion>
+                <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Photos
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="div-over-flow">
+                        <ul class="ul-grid">
+                          <li *ngFor="let item of pictures; let i=index">
+                            <img class="slider-img" src="{{item}}" alt="">
+                            <span class="remove-btn" (click)="removeImage(i)"><img class="delete-img" src="assets/img/delete.png" alt="">Remove</span>
+                          </li>
+                        </ul>
+                      </div>
+                        <a href="javascript:void(0);" class="edit-a" (click)="fileInput.click()"> <img src="assets/img/down.png" alt=""> Add photo</a>
+                        <!-- <a href="javascript:void(0);" (click)="fileInput.click()"><img src="assets/img/down.png" alt=""> Add photo</a>-->
+                        <input hidden (change)="onFileSelected($event.target)" #fileInput type="file" id="file">
+                </mat-expansion-panel>
+            </mat-accordion>
+            </div>
+
+        </div>
+    </div>
+</form>

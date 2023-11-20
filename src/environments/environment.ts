@@ -21,6 +21,7 @@ export const environment = {
   showAzureLoginOption: true,
   natsEnvironmentName: 'ewf-dev',
   rootNamespace: 'iam.ewc',
+  mapBoxToken: 'pk.eyJ1IjoiamVycnlib2kiLCJhIjoiY2szeXQ3am11MGN4YjNudXN3ajQzbGp0cyJ9.2lyeSX21QJrdP4fTh96w3A',
 
   fullNetworkName: 'EnergyWeb Volta Chain',
   networkName: 'Volta',

@@ -10,3 +10,18 @@ a:hover {
   padding: 1.1rem 0.95rem;
   font-size: 0.85rem;
 }
+
+p {
+  &.pr-2.default-color {
+    font-size: 12px;
+    font-weight: 500!important;
+  }
+}
+.icon-center{
+  display: flex!important;
+  align-items: center!important;
+}
+
+::ng-deep .mat-mdc-menu-content{
+  padding: 0px 0px !important;
+}

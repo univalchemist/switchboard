@@ -1,8 +1,182 @@
-<div class="w-100 h-responsive bg-color">
+<div class="new-design">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- main page -->
+        <div class="form-full" *ngIf="!showDetails">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="back-div">
+                <p class="bk-arrow"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
+              </div>
+              <!-- <button mat-raised-button class="btn btn-primary md-enroll w-100 only-scan-qr" appQrCodeScanner (scannedValue)="handleScannedValue($event.data)">
+                <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
+              </button> -->
+              <div class="text-center my-2">
+                <!-- only-scan-qr -->
+                <button mat-raised-button class="btn btn-primary md-enroll"  (click)="handleScannedValue('ZDMxM2E1ZDMtYWhsYi00ODZmLTl0NjAtN2UwYmNlZDY1ZTdm')">
+                  <img src="assets/img/qr-code.png" class="qr-code" alt=""> <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <form role="form" [formGroup]="assetForm">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="under-form">
+                  <div class="wireless-port">
+                    <p class="wire-pod">Wireless Pods</p>
+                    <div class="config">
+                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteWireless == false">{{ShowCompleteWireless == true ?'Configure' : 'complete'}}</button>
+                      <img (click)="openDetails('Wireless Pods')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
+                    </div>
+                  </div>
+                  <div class="col-lg-12 p-0">
+                    <mat-label class="" i18n="@@register.asset.wirelessType">Type</mat-label>
+                    <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                      <mat-select class="md-enroll" placeholder="Please select type" formControlName="wirelessType"
+                        (selectionChange)="enrolForSelected($event)">
+                        <mat-option class="md-enroll" [value]="WirelessPodType.ModbusRTU">ModbusRTU</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-12 p-0">
+                    <mat-label class="" i18n="@@register.asset.wirelessPod.serialNumber">Serial number</mat-label>
+                    <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                      <input matInput autocomplete="off" type="text"
+                        i18n-placeholder="@@register.asset.wirelessPod.serialNumber.placeholder"
+                        placeholder="Enter serial number" formControlName="wirelessSn" maxlength="256" />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-12 p-0">
+                    <mat-label class="" i18n="@@register.asset.publicKey">Public key</mat-label>
+                    <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                      <input matInput autocomplete="off" type="text"
+                        i18n-placeholder="@@register.asset.wireless.publicKey.placeholder" placeholder="Enter public key"
+                        formControlName="wirelessPublicKey" maxlength="256" />
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="last-qr-bt">
+                    <button class="qr-bt"><img src="assets/img/qr-code.png" class="qr-code" alt="">Scan QR code</button>
+                  </div> -->
+                </div>
+                <div class="under-form">
+                  <div class="wireless-port">
+                    <p class="wire-pod">Solar powerplant</p>
+                    <div class="config">
+                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteSolarPanel == false">{{ShowCompleteSolarPanel == true ?'Configure' : 'complete'}}</button>
+                      <img (click)="openDetails('solar powerplant')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
+                    </div>
+                  </div>
+                  <div class="col-lg-12 p-0">
+                    <mat-label class="" i18n="@@register.asset.solar.peakPower">Peak power</mat-label>
+                    <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                      <input matInput autocomplete="off" type="text"
+                        i18n-placeholder="@@register.asset.solar.peakPower.placeholder" placeholder="Enter peak power"
+                        formControlName="solarPeakPower" maxlength="256" />
+                    </mat-form-field>
+                  </div>
+                  <div class="margin-15">
+                    <p class="Inverter">Inverter</p>
+                  </div>
+                  <div class="col-lg-12 p-0">
+                    <mat-label class="" i18n="@@register.asset.inverterType">Type</mat-label>
+                    <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
+                      <input matInput autocomplete="off" type="text"
+                        i18n-placeholder="@@register.asset.inverterType.placeholder" placeholder="Enter Inverter type"
+                        formControlName="solarInverterType" maxlength="256" />
+                    </mat-form-field>
+                  </div>
+                  <div class="margin-15">
+                    <p class="Inverter">Location</p>
+                  </div>
+                  <div class="map">
+                    <app-mapbox-elm [toShowSearch]="editMapOn" (pickedLocation)="changeLocation($event)" [allowPickLocation]="editMapOn"></app-mapbox-elm>
+                  </div>
+                  <a href="javascript:void(0)" class="edit-a" (click)="toggleEdit()"> <img src="assets/img/edit-location.png" alt="" > {{editMapOn ? 'Save' : 'Edit'}} location</a>
+                  <div class="margin-15">
+                    <p class="Inverter">Photos ({{pictures?.length}})</p>
+                    <div class="div-over-flow">
+                      <ul class="ul-grid">
+                        <li *ngFor="let item of pictures; let i=index">
+                          <img class="slider-img" src="{{item}}" alt="">
+                          <span class="remove-btn" (click)="removeImage(i)"><img class="delete-img" src="assets/img/delete.png" alt="">Remove</span>
+                        </li>
+                      </ul>
+                    </div>
+                      <a href="javascript:void(0);" class="edit-a" (click)="fileInput.click()"> <img src="assets/img/down.png" alt=""> Add photo</a>
+                      <!-- <a href="javascript:void(0);" (click)="fileInput.click()"><img src="assets/img/down.png" alt=""> Add photo</a>-->
+                      <input hidden (change)="onFileSelected($event.target)" #fileInput type="file" id="file">
+                  </div>
+                </div>
+                <div class="under-form mar-less">
+                  <div class="wireless-port">
+                    <p class="wire-pod">Energymeter</p>
+                    <div class="config">
+                      <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteEnergy == false">{{ShowCompleteEnergy == true ?'Configure' : 'complete'}}</button>
+                      <img  (click)="openDetails('energymeter')" src="assets/img/arrow-right.png" class="arrow-right" alt="">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="enrol-save text-center">
+                  <button mat-raised-button class="btn btn-primary md-enroll" (click)="onSave()"><span i18n="@@register.asset.enroll">Enroll</span></button>
+                  <button mat-raised-button class="btn btn-primary md-enroll ml-2 primary" (click)="onSave()"><span i18n="@@register.asset.save">Save</span></button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Solar-Details -->
+      <div class="form-full" *ngIf="showDetails == 'solar powerplant'">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="back-div d-flex justify-content-between">
+                <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
+                <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteSolarPanel == false">{{ShowCompleteSolarPanel == true ?'Configure' : 'complete'}}</button>
+            </div>
+          </div>
+        </div>
+        <app-solar-details [solarDetails]="solarDetails" (sendBackData)="mapBackSolarPanel($event)"></app-solar-details>
+      </div>
+
+      <!-- EnergyMeter -->
+      <div class="form-full" *ngIf="showDetails == 'energymeter'">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="back-div d-flex justify-content-between">
+                <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
+                <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteEnergy == false">{{ShowCompleteEnergy == true ?'Configure' : 'complete'}}</button>
+            </div>
+          </div>
+          
+        </div>
+        <app-energymeter-details [energyMeterDetails]="energyMeterDetails" (sendBackData)="mapBackEnergyMeter($event)"></app-energymeter-details>
+      </div>
+      <!-- Wireless -->
+      <div class="form-full" *ngIf="showDetails == 'Wireless Pods'">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="back-div d-flex justify-content-between">
+                <p class="bk-arrow" (click)="openDetails('')"><img class="arrow-img" src="assets/img/arrow.png" alt=""> Back</p>
+                <button class="Configure-bt sm-bt" [class.iscomp] = "ShowCompleteWireless == false">{{ShowCompleteWireless == true ?'Configure' : 'complete'}}</button>
+            </div>
+          </div>
+          
+        </div>
+        <app-wireless-detail [wirelessDetails]="wirelessDetails" (sendBackData)="mapBackWireless($event)"></app-wireless-detail>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Keep previous for ref. will remove later -->
+<!-- <div class="w-100 h-responsive bg-color">
   <div class="d-flex justify-content-center flex-column align-items-center w-100">
     <div
-      class="position-relative d-flex txt-color justify-content-start justify-content-md-center align-items-md-center flex-column px-4 mb-1 w-100"
-      >
+      class="position-relative d-flex txt-color justify-content-start justify-content-md-center align-items-md-center flex-column px-4 mb-1 w-100">
       <div class="back-btn">
         <mat-icon class="mr-2 back-icon" svgIcon="arrow-back-icon"></mat-icon>
         <span i18n="@@register.asset.back">Back</span>
@@ -12,7 +186,6 @@
       <button mat-raised-button class="btn btn-primary md-enroll w-100" (click)="test()">
         <span i18n="@@register.asset.scanQrCode">Scan QR code</span>
       </button>
-      <!-- Wireless pod -->
       <mat-card class="asset-form mt-5">
         <div class="row">
           <div class="col-lg-12">
@@ -30,20 +203,21 @@
           <div class="col-lg-12">
             <mat-label class="" i18n="@@register.asset.wirelessPod.serialNumber">Serial number</mat-label>
             <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
-              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.wirelessPod.serialNumber.placeholder"
+              <input matInput autocomplete="off" type="text"
+                i18n-placeholder="@@register.asset.wirelessPod.serialNumber.placeholder"
                 placeholder="Enter serial number" formControlName="wirelessSn" maxlength="256" />
             </mat-form-field>
           </div>
           <div class="col-lg-12">
             <mat-label class="" i18n="@@register.asset.publicKey">Public key</mat-label>
             <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
-              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.wireless.publicKey.placeholder"
-                placeholder="Enter public key" formControlName="wirelessPublicKey" maxlength="256" />
+              <input matInput autocomplete="off" type="text"
+                i18n-placeholder="@@register.asset.wireless.publicKey.placeholder" placeholder="Enter public key"
+                formControlName="wirelessPublicKey" maxlength="256" />
             </mat-form-field>
           </div>
         </div>
       </mat-card>
-      <!-- Solar powerplant -->
       <mat-card class="asset-form">
         <div class="row">
           <div class="col-lg-12">
@@ -52,8 +226,9 @@
           <div class="col-lg-12">
             <mat-label class="" i18n="@@register.asset.solar.peakPower">Peak power</mat-label>
             <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
-              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.solar.peakPower.placeholder"
-                placeholder="Enter peak power" formControlName="solarPeakPower" maxlength="256" />
+              <input matInput autocomplete="off" type="text"
+                i18n-placeholder="@@register.asset.solar.peakPower.placeholder" placeholder="Enter peak power"
+                formControlName="solarPeakPower" maxlength="256" />
             </mat-form-field>
           </div>
         </div>
@@ -64,8 +239,9 @@
           <div class="col-lg-12">
             <mat-label class="" i18n="@@register.asset.inverterType">Type</mat-label>
             <mat-form-field class="mt-2 md-enroll" appearance="outline" floatPlaceholder="never">
-              <input matInput autocomplete="off" type="text" i18n-placeholder="@@register.asset.inverterType.placeholder"
-                placeholder="Enter Inverter type" formControlName="solarInverterType" maxlength="256" />
+              <input matInput autocomplete="off" type="text"
+                i18n-placeholder="@@register.asset.inverterType.placeholder" placeholder="Enter Inverter type"
+                formControlName="solarInverterType" maxlength="256" />
             </mat-form-field>
           </div>
           <div class="col-lg-12">
@@ -73,15 +249,15 @@
         </div>
       </mat-card>
     </form>
-    <!-- <div class="footer"><div class="d-flex justify-content-between align-items-center mx-3 mx-md-4 h-100">
-      <div>
-        <img src="assets/img/icons/ew-logo-white.png" width="98px" height="auto" />
-      </div>
-      <div>
-        <a class="default-color mx-2" href="#">Privacy Policy</a>
-        <a class="default-color mx-2" href="#">Cookies Policy</a>
-      </div>
-    </div>
-    </div> -->
+  </div>
+</div> -->
+<!-- <div class="footer"><div class="d-flex justify-content-between align-items-center mx-3 mx-md-4 h-100">
+  <div>
+    <img src="assets/img/icons/ew-logo-white.png" width="98px" height="auto" />
+  </div>
+  <div>
+    <a class="default-color mx-2" href="#">Privacy Policy</a>
+    <a class="default-color mx-2" href="#">Cookies Policy</a>
   </div>
 </div>
+</div> -->

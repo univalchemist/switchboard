@@ -23,3 +23,93 @@
 textarea.jsoneditor-text {
   min-height: 500px;
 }
+span.mat-expansion-indicator::after {
+  color: #000 !important;
+}
+
+mat-checkbox {
+  opacity: 1 !important; 
+}
+
+
+.new-design .mat-mdc-form-field-infix {
+  padding: 12px 0 !important;
+  min-height: auto !important;
+}
+.new-design button.btn.btn-primary {
+  border-radius: 8px;
+  border: 1px solid #D0D5DD !important;
+  background: var(--base-white, #FFF);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  padding: 12px 18px !important;
+  min-height: 45px;
+}
+.new-design .mat-expansion-panel-body ul li {
+  border-radius: 8px;
+  border: 1px solid var(--gray-200, #EAECF0);
+  margin: 0 0 10px 0;
+  padding: 5px 5px;
+}
+
+mat-list-item.mat-mdc-list-item.mdc-list-item.mat-mdc-list-item-single-line.mdc-list-item--with-one-line {
+  border-radius: 8px;
+  border: 1px solid var(--gray-200, #EAECF0);
+  margin: 0 0 10px 0;
+  padding: 5px 5px;
+}
+
+.new-design .mat-expansion-panel-body ul li label.mdc-label {
+  margin: 0;
+  padding: 0;
+  color: var(--gray-900, #101828);
+/* Text sm/Medium */
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+}
+.mb-2.parent-this-span mat-panel-title span {
+  border-radius: 6px;
+  border: 1px solid var(--gray-200, #EAECF0);
+  background: var(--gray-50, #F9FAFB);
+  padding: 3px 5px;
+  margin: 0 0 0 5px;
+}
+.form-full mat-expansion-panel-header {
+  border-radius: 12px !important;
+  border: 1px solid var(--gray-100, #F2F4F7);
+  background: var(--base-white, #FFF);
+  box-shadow: none !important;
+  padding: 15px 15px !important;
+  min-height: 60px;
+}
+.form-full mat-expansion-panel {
+  box-shadow: none !important;
+}
+.form-full mat-expansion-panel {
+  background: transparent !important;
+}
+.new-design .mat-expansion-panel-body{
+  padding: 15px !important;
+}
+
+
+.new-design .mat-mdc-raised-button:hover .mat-mdc-button-persistent-ripple::before,
+.new-design .mat-mdc-unelevated-button:hover .mat-mdc-button-persistent-ripple::before{
+  opacity: 0 !important;
+ }
+
+ ::ng-deep .mat-bottom-sheet-container-large {
+  min-width: auto;
+  padding: 20px 15px 20px 15px;
+  height: auto !important;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 413px !important;
+  transform: translateY(-50%) !important;
+  max-height: 90vh !important;
+}

@@ -31,6 +31,15 @@ import { RouterConst } from '../router-const';
 import { AssetEnrolmentListComponent } from './asset-enrolment-list/asset-enrolment-list.component';
 import { EnrolmentListModule } from '../enrolment/enrolment-list/enrolment-list.module';
 import { RegisterAssetComponent } from './register-asset/register-asset.component';
+import { MapboxElmModule } from 'src/app/layout/components/mapbox-elm/mapbox-elm.module';
+import { SolarDetailsComponent } from './solar-details/solar-details.component';
+import { EnergymeterDetailsComponent } from './energymeter-details/energymeter-details.component';
+import { MatListModule } from '@angular/material/list';
+import { PopupSolarComponent } from './popup-solar/popup-solar.component';
+import {
+  MatBottomSheetModule,
+} from '@angular/material/bottom-sheet';
+import { WirelessDetailComponent } from './wireless-detail/wireless-detail.component';
 
 const routes: Routes = [
   { path: '', component: AssetsComponent },
@@ -56,6 +65,10 @@ const routes: Routes = [
     TypeAlgorithmPipe,
     AssetDetailsComponent,
     RegisterAssetComponent,
+    SolarDetailsComponent,
+    EnergymeterDetailsComponent,
+    PopupSolarComponent,
+    WirelessDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +90,9 @@ const routes: Routes = [
     ClipboardModule,
     QrCodeScannerModule,
     EnrolmentListModule,
+    MapboxElmModule,
+    MatListModule,
+    MatBottomSheetModule
   ],
 })
 export class AssetsModule {}

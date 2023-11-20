@@ -90,13 +90,7 @@ p.PodID-1 {
   background: var(--base-white, #FFF);
   margin: 0 0 15px 0;
 }
-::ng-deep button span img.qr-code {
-  width: 20px !important;
-  margin: 0 6px;
-}
-::ng-deep .md-enroll{
-  font-family: Inter !important;
-}
+
 p.wire-pod {
   color: var(--gray-800, #1D2939);
   text-align: center;
@@ -229,9 +223,9 @@ a.edit-a {
 }
 
 a.edit-a img {
-  width: 25px;
+  width: 18px !important;
   position: relative;
-  bottom: 2px;
+  margin: 0 15px !important;
 }
 
 p.Inverter {
@@ -350,13 +344,15 @@ img.slider-img {
     }
   }
 }
+::ng-deep .popuBtn{
+  color: var(--primary-700, #6941C6) !important;
+
+}
+::ng-deep a img{
+  width: 25px !important;
+}
 
 .sm-bt {
   height: 20px;
   padding: 0 6px;
-}
-.iscomp {
-  color: var(--success-700, #067647) !important;
-  border: 1px solid var(--success-200, #ABEFC6) !important;
-  background: var(--success-50, #ECFDF3) !important;
 }
